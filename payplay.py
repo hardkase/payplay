@@ -29,7 +29,7 @@ class Job_Handler(object):
         self.date_data = date_data
         # self.truth = tru
         self.jobtype = job["FREQUENCY"]
-        self.jobrun = []
+        self.jobruns = []
     def reset(self):
         self.__init__()
 
@@ -70,12 +70,18 @@ def main():
             # jobject = util.process_qtr_aft(jobject)
         else:
             pass
-        for item in jobject.jobrun:
-            print("JOB INDEX: ", len(item.index))
-        alljobs.append(jobject.jobrun)
-    for item in alljobs:
-        print("DEBUG: ", item)
-    final = pd.DataFrame([jobject.jobrun])
+        # for item in jobject.jobruns:
+            # print("JOB INDEX: ", len(item.index))
+        alljobs.append(jobject.jobruns)
+    # for item in alljobs:
+        # print("DEBUG: ", item)
+    final = pd.DataFrame([alljobs], columns=con.FINAL_COLUMNS)
+    final = final.transpose()
+    for i in range(len(final.columns)):
+        if final.columns[i] not in con.FINAL_COLUMNS:
+            final = final.drop(final.columns[i], axis=1)
+    util.csvmaker(final, "shit")
+    # final.columns = con.FINAL_COLUMNS
     print("DEBUG - DO WE GET OUTPUT? ", final)
             # jobject = util.process_monthly(jobject)
         # print("DEBUG - JOBJECT", job.jobtype)

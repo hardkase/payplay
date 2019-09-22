@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np 
 import datetime as dt
 import constants as con
-from dateutil import relativedelta
+from dateutil.relativedelta import relativedelta
 from calendar import monthrange
 
 def csvmaker(data, name):
@@ -36,6 +36,7 @@ def process_weekly(jobhandler):
     for a in range(0, 52):
         push = a
         if a < 1:
+            first_run = listify(newjob)
             first_run = init_weekly(newjob, jobhandler.date_data)
             jobhandler.first_run = first_run
             jobhandler.jobruns.append(first_run)
@@ -84,22 +85,24 @@ def process_qtr_aft(jobhandler):
     return jobhandler
 
 def init_weekly(newjob, date_data):
-    for b in range(len(newjob.index)):
-        value = newjob[b]
-        if newjob.index[b] in con.TARGETS:
+    for i in range(len(newjob)):
+        value = newjob[i]
+        if con.FINAL_COLUMNS[i] in con.TARGETS:
             value = get_weekly_date(value, date_data)
-        newjob[b] = value
+        newjob[i] = value
         newjob = build_summary(newjob)
     return newjob
 
 def run_weekly(first_run, push):
     for c in range (len(first_run.index)):
-        value = first_run[c]
-        if first_run.index[c] in con.TARGETS:
-            value = value+relativedelta(weeks=+push)
-            first_run[c] = value
-            first_run = build_summary(first_run)
-        return first_run
+        nextwk = first_run
+        value = nextwk[c]
+        if con.FINAL_COLUMNS[c] in con.TARGETS:
+            change = 7 * push
+            value = value + relativedelta(days=+change)
+            nextwk[c] = value
+            nextwk = build_summary(nextwk)
+        return nextwk
         
 
 def init_monthly(newjob):
@@ -127,8 +130,8 @@ def get_weekly_date(value, date_data):
         print("DEBUG : WEEKDAY NUMBER: ", paywkday)
         # return wkday value from con
         print("paywekday - val: {0}\ttype: {1}\ncurrent val: {2}\ttype: {3}".format(paywkday, type(paywkday), date_data[4], type(date_data[4])))
-        daydiff = paywkday - date_data[4]
-        payday = date_data[0] + relativedelta(days=+(date_data[3] + daydiff))
+        daydiff = (paywkday - date_data[4]) + 7
+        payday = date_data[0] + relativedelta(days=+daydiff)
         print("DEBUG REJIGGED PAY DATE: ", payday)
         value = payday
         # payday - current wkday
@@ -138,10 +141,21 @@ def get_weekly_date(value, date_data):
     return value
 
 def build_summary(job):
-    client = job["CLIENT"]
-    freq = job["FREQUENCY"]
-    pay = job["PAY_DATE"]
+    client = job[1]
+    freq = job[2]
+    pay = job[3]
     summary = "{0} - {1} - {2}".format(client, freq, pay)
-    job["SUMMARY"] = summary
+    job[0] = summary
     return job
+
+def listify(job):
+    newlist = []
+    for z in range(len(job.index)):
+        newlist.append(job[z])
+    for item in newlist:
+        print("DEBUG - LIST! ", item)
+    print("LEN OF LIST", len(newlist))
+    print("LEN OF JOB SERIES ", len(job.index))
+    return newlist
+
 
