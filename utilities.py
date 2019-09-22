@@ -18,7 +18,15 @@ def lower(val):
 
 def to_lower(data):
     #for i in range(len(data.index)):
-    data.apply(lambda x: x.str.lower() if(x.dtype == 'object') else x)
+    for i in range(len(data.index)):
+        series = data.iloc[i]
+        series.str.lower
+        for j in range(len(series.index)):
+            val = series[j]
+            if isinstance(val, str):
+                series[j] = val.lower()
+        data.iloc[i] = series
+        print("DEBUG: ", series)
     return data
 
 

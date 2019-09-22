@@ -26,9 +26,18 @@ def main():
     dator = Data_Handler(today, data)
     data = util.fix_columns(dator.data)
     data = util.insert_column(dator.data, 0, "SUMMARY", "Summary Goes Here")
-    data = util.to_lower(dator.data) # This isn't working ...
+    data = util.to_lower(dator.data)
     dator.data = data
     dator.print()
+    # weekly = dator.data["FREQUENCY"] ==("weekly")
+    weekly = dator.data.loc[dator.data['FREQUENCY']=="weekly"]
+    monthly = dator.data.loc[dator.data['FREQUENCY']=="monthly"]
+    qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly"]
+    qtrly_aft = dator.data.loc[dator.data['FREQUENCY']=="quarterly-after"]
+    print("DEBUG - WEEKLY:\n", weekly)
+    print("DEBUG - WEEKLY:\n", monthly)
+    print("DEBUG - WEEKLY:\n", qtrly)
+    print("DEBUG - WEEKLY:\n", qtrly_aft)
 if __name__ == '__main__':
     main()
 
