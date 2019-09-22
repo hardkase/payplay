@@ -11,13 +11,8 @@ def insert_column(data, index_pos, col_name, value):
     data = data.insert(index_pos, col_name, value)
     return data
 
-def lower(val):
-    if isinstance(val, str):
-        val = val.lower()
-    return val
-
 def to_lower(data):
-    #for i in range(len(data.index)):
+    # there has to be an easier way to do this ...
     for i in range(len(data.index)):
         series = data.iloc[i]
         series.str.lower

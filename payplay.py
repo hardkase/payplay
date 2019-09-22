@@ -35,9 +35,10 @@ def main():
     qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly"]
     qtrly_aft = dator.data.loc[dator.data['FREQUENCY']=="quarterly-after"]
     print("DEBUG - WEEKLY:\n", weekly)
-    print("DEBUG - WEEKLY:\n", monthly)
-    print("DEBUG - WEEKLY:\n", qtrly)
-    print("DEBUG - WEEKLY:\n", qtrly_aft)
+    print("DEBUG - MONTHLY:\n", monthly)
+    print("DEBUG - QUARTERLY:\n", qtrly)
+    print("DEBUG - QUARTERLY-AFTER:\n", qtrly_aft)
+    # This is all working, ready to start processing each job type...
 if __name__ == '__main__':
     main()
 
