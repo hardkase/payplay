@@ -25,7 +25,9 @@ def main():
     data = pd.DataFrame(pd.read_excel("c:/code/fakepay.xlsx"))
     dator = Data_Handler(today, data)
     data = util.fix_columns(dator.data)
-    data = util.insert_column(data, 0, "SUMMARY", "Summary Goes Here")
+    data = util.insert_column(dator.data, 0, "SUMMARY", "Summary Goes Here")
+    data = util.to_lower(dator.data) # This isn't working ...
+    dator.data = data
     dator.print()
 if __name__ == '__main__':
     main()
