@@ -1,3 +1,4 @@
+from __future__ import print_function
 import pandas as pd 
 import numpy as np 
 import datetime as dt 
@@ -26,17 +27,25 @@ class Job_Handler(object):
     def __init__(self, job, date_data):
         self.job = job 
         self.first_run = job  # This will be the first processed job of any given jobtype
+        self.first_list = []
         self.date_data = date_data
         # self.truth = tru
         self.jobtype = job["FREQUENCY"]
         self.jobruns = []
+        self.joblists = []
     def reset(self):
         self.__init__()
 
 def main():
+    opsys = util.oscheck()
+    print(opsys)
+    if "Linux" in opsys:
+        PATHDATA = con.LINUX_PATHDATA
+    else:
+        PATHDATA = con.PATHDATA
     alljobs = pd.DataFrame(columns=con.COLUMN_NAMES)
     today = dt.date.today()
-    data = pd.DataFrame(pd.read_excel("{0}{1}{2}".format(con.PATHDATA[0], con.PATHDATA[2], con.PATHDATA[3])))
+    data = util.feed_pandas("{0}{1}{2}".format(PATHDATA[0], PATHDATA[2], PATHDATA[3]))
     # dator = Data_Handler(today, data)
     data = util.fix_columns(data)
     data.data = util.insert_column(data, 0, "SUMMARY", "Summary Goes Here")
@@ -53,8 +62,9 @@ def main():
     print("DEBUG - MONTHLY:\n", monthly)
     print("DEBUG - QUARTERLY:\n", qtrly)
     print("DEBUG - QUARTERLY-AFTER:\n", qtrly_aft)
-    util.csvmaker(data, "test")
+    util.csvmaker(data, "test", PATHDATA)
     alljobs = []
+    alljob_lists = []
     for a in range(len(dator.data.index)):
         job = dator.data.iloc[a]
         print("JOB DETAILS: ", job)
@@ -70,19 +80,35 @@ def main():
             # jobject = util.process_qtr_aft(jobject)
         else:
             pass
+        
+        for item in jobject.jobruns:
+            alljobs.append(item)
+        # alljobs.append(jobject.jobruns)
         # for item in jobject.jobruns:
             # print("JOB INDEX: ", len(item.index))
-        alljobs.append(jobject.jobruns)
+        # holder = pd.Dataframe([alljobs], columns=)
     # for item in alljobs:
         # print("DEBUG: ", item)
-    final = pd.DataFrame([alljobs], columns=con.FINAL_COLUMNS)
-    final = final.transpose()
+    final = pd.DataFrame(alljobs, columns=con.FINAL_COLUMNS)
+    print("FINAL INDEX LEN {0}, COL LEN {1}".format(len(final.index), len(final.columns)))
+    for item in final.columns:
+        print(item)
+    print("INDEX LEN: ", len(final.columns))
+    #for item in final.columns:
+         
+    # final.columns = con.FINAL_COLUMNS
+    final_list = pd.DataFrame([alljob_lists])
+    final_list = final_list.transpose()
+    # final = final.transpose()
+    """
     for i in range(len(final.columns)):
         if final.columns[i] not in con.FINAL_COLUMNS:
             final = final.drop(final.columns[i], axis=1)
-    util.csvmaker(final, "shit")
+    """
+    util.csvmaker(final, "shit_series", PATHDATA)
+    util.csvmaker(final_list, "shitlists", PATHDATA)
     # final.columns = con.FINAL_COLUMNS
-    print("DEBUG - DO WE GET OUTPUT? ", final)
+    print("DEBUG - SERIES - DO WE GET OUTPUT? ", final)
             # jobject = util.process_monthly(jobject)
         # print("DEBUG - JOBJECT", job.jobtype)
     # jobject = JobHandler(dator)

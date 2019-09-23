@@ -2,6 +2,7 @@ COLUMN_NAMES = ["CLIENT", "FREQUENCY", "PAY_DATE", "INPUTS_DUE", "SEND_REPORTS"]
 TARGETS = ["PAY_DATE", "INPUTS_DUE", "SEND_REPORTS"]
 FINAL_COLUMNS = ["SUMMARY", "CLIENT", "FREQUENCY", "PAY_DATE", "INPUTS_DUE", "SEND_REPORTS"]
 PATHDATA = ["c:/code/", "test/", "fakepay", ".xlsx", ".csv"]
+LINUX_PATHDATA = ["~/p3_code/payplay/", "test/", "fakepay", ".xlsx", ".csv"]
 WEEKDAYLIST = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 WEEKDAYS = {
     0: "monday",

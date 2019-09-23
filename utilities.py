@@ -1,12 +1,22 @@
+from __future__ import print_function
 import pandas as pd 
 import numpy as np 
 import datetime as dt
 import constants as con
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange
+import platform
 
-def csvmaker(data, name):
-    data.to_csv("{0}{1}{2}{3}".format(con.PATHDATA[0], con.PATHDATA[1], name, con.PATHDATA[4]))
+def oscheck():
+    osversion = platform.platform()
+    return osversion
+
+def feed_pandas(doc):
+    data = pd.DataFrame(pd.read_excel(doc))
+    return data
+
+def csvmaker(data, name, PATHDATA):
+    data.to_csv("{0}{1}{2}{3}".format(PATHDATA[0], PATHDATA[1], name, PATHDATA[4]))
 
 def fix_columns(data):
     data.columns = con.COLUMN_NAMES
@@ -36,12 +46,14 @@ def process_weekly(jobhandler):
     for a in range(0, 52):
         push = a
         if a < 1:
-            first_run = listify(newjob)
-            first_run = init_weekly(newjob, jobhandler.date_data)
+            first_run = newjob
+            first_run = init_weekly(first_run, jobhandler.date_data)
+            # first_list = listify(newjob)
             jobhandler.first_run = first_run
-            jobhandler.jobruns.append(first_run)
+            jobhandler.jobruns.append(first_run) # add series to list
         else:
-            current_job = run_weekly(jobhandler.first_run, push)
+            current_job = jobhandler.first_run # series
+            current_job = run_weekly(current_job, push) # handle series
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
@@ -84,7 +96,7 @@ def process_qtr_aft(jobhandler):
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
-def init_weekly(newjob, date_data):
+def init_list_weekly(newjob, date_data):
     for i in range(len(newjob)):
         value = newjob[i]
         if con.FINAL_COLUMNS[i] in con.TARGETS:
@@ -93,9 +105,18 @@ def init_weekly(newjob, date_data):
         newjob = build_summary(newjob)
     return newjob
 
-def run_weekly(first_run, push):
-    for c in range (len(first_run.index)):
-        nextwk = first_run
+def init_weekly(newjob, date_data):
+    for i in range(len(newjob.index)):
+        value = newjob[i]
+        if newjob.index[i] in con.TARGETS:
+            value = get_weekly_date(value, date_data)
+        newjob[i] = value
+        newjob = build_summary(newjob)
+    return newjob
+
+def run_weekly_list(first_list, push):
+    nextwk = first_list
+    for c in range (len(nextwk)):
         value = nextwk[c]
         if con.FINAL_COLUMNS[c] in con.TARGETS:
             change = 7 * push
@@ -104,6 +125,16 @@ def run_weekly(first_run, push):
             nextwk = build_summary(nextwk)
         return nextwk
         
+def run_weekly(first_run, push):
+    nextwk = first_run
+    for c in range (len(nextwk.index)):
+        value = nextwk[c]
+        if first_run.index[c] in con.TARGETS:
+            change = 7 * push
+            value = value + relativedelta(days=+change)
+            nextwk[c] = value
+            nextwk = build_summary(nextwk)
+        return nextwk
 
 def init_monthly(newjob):
     pass

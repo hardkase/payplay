@@ -1,547 +1,625 @@
-,0,1,2,3,4,5,6,7,8,9
-10,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-11,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-12,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-13,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-14,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-15,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-16,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-17,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-18,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-19,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-20,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-21,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-22,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-23,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-24,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-25,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-26,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-27,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-28,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-29,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-30,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-31,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-32,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-33,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-34,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-35,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-36,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-37,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-38,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-39,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-40,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-41,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-42,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-43,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-44,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-45,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-46,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-47,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-48,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-49,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-50,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
-51,,,"SUMMARY         evil inc - weekly - 2019-09-25
-CLIENT                                evil inc
-FREQUENCY                               weekly
-PAY_DATE                            2019-09-25
-INPUTS_DUE                          2019-09-23
-SEND_REPORTS                        2019-09-27
-Name: 2, dtype: object",,,"SUMMARY         weyland yutani - weekly - 2019-09-27
-CLIENT                                weyland yutani
-FREQUENCY                                     weekly
-PAY_DATE                                  2019-09-27
-INPUTS_DUE                                2019-09-25
-SEND_REPORTS                              2019-09-27
-Name: 5, dtype: object",,,,
+,0
+0,EVIL INC - weekly - Wednesday
+1,EVIL INC
+2,weekly
+3,Wednesday
+4,Monday
+5,Friday
+6,EVIL INC - weekly - Wednesday
+7,EVIL INC
+8,weekly
+9,Wednesday
+10,Monday
+11,Friday
+12,EVIL INC - weekly - Wednesday
+13,EVIL INC
+14,weekly
+15,Wednesday
+16,Monday
+17,Friday
+18,EVIL INC - weekly - Wednesday
+19,EVIL INC
+20,weekly
+21,Wednesday
+22,Monday
+23,Friday
+24,EVIL INC - weekly - Wednesday
+25,EVIL INC
+26,weekly
+27,Wednesday
+28,Monday
+29,Friday
+30,EVIL INC - weekly - Wednesday
+31,EVIL INC
+32,weekly
+33,Wednesday
+34,Monday
+35,Friday
+36,EVIL INC - weekly - Wednesday
+37,EVIL INC
+38,weekly
+39,Wednesday
+40,Monday
+41,Friday
+42,EVIL INC - weekly - Wednesday
+43,EVIL INC
+44,weekly
+45,Wednesday
+46,Monday
+47,Friday
+48,EVIL INC - weekly - Wednesday
+49,EVIL INC
+50,weekly
+51,Wednesday
+52,Monday
+53,Friday
+54,EVIL INC - weekly - Wednesday
+55,EVIL INC
+56,weekly
+57,Wednesday
+58,Monday
+59,Friday
+60,EVIL INC - weekly - Wednesday
+61,EVIL INC
+62,weekly
+63,Wednesday
+64,Monday
+65,Friday
+66,EVIL INC - weekly - Wednesday
+67,EVIL INC
+68,weekly
+69,Wednesday
+70,Monday
+71,Friday
+72,EVIL INC - weekly - Wednesday
+73,EVIL INC
+74,weekly
+75,Wednesday
+76,Monday
+77,Friday
+78,EVIL INC - weekly - Wednesday
+79,EVIL INC
+80,weekly
+81,Wednesday
+82,Monday
+83,Friday
+84,EVIL INC - weekly - Wednesday
+85,EVIL INC
+86,weekly
+87,Wednesday
+88,Monday
+89,Friday
+90,EVIL INC - weekly - Wednesday
+91,EVIL INC
+92,weekly
+93,Wednesday
+94,Monday
+95,Friday
+96,EVIL INC - weekly - Wednesday
+97,EVIL INC
+98,weekly
+99,Wednesday
+100,Monday
+101,Friday
+102,EVIL INC - weekly - Wednesday
+103,EVIL INC
+104,weekly
+105,Wednesday
+106,Monday
+107,Friday
+108,EVIL INC - weekly - Wednesday
+109,EVIL INC
+110,weekly
+111,Wednesday
+112,Monday
+113,Friday
+114,EVIL INC - weekly - Wednesday
+115,EVIL INC
+116,weekly
+117,Wednesday
+118,Monday
+119,Friday
+120,EVIL INC - weekly - Wednesday
+121,EVIL INC
+122,weekly
+123,Wednesday
+124,Monday
+125,Friday
+126,EVIL INC - weekly - Wednesday
+127,EVIL INC
+128,weekly
+129,Wednesday
+130,Monday
+131,Friday
+132,EVIL INC - weekly - Wednesday
+133,EVIL INC
+134,weekly
+135,Wednesday
+136,Monday
+137,Friday
+138,EVIL INC - weekly - Wednesday
+139,EVIL INC
+140,weekly
+141,Wednesday
+142,Monday
+143,Friday
+144,EVIL INC - weekly - Wednesday
+145,EVIL INC
+146,weekly
+147,Wednesday
+148,Monday
+149,Friday
+150,EVIL INC - weekly - Wednesday
+151,EVIL INC
+152,weekly
+153,Wednesday
+154,Monday
+155,Friday
+156,EVIL INC - weekly - Wednesday
+157,EVIL INC
+158,weekly
+159,Wednesday
+160,Monday
+161,Friday
+162,EVIL INC - weekly - Wednesday
+163,EVIL INC
+164,weekly
+165,Wednesday
+166,Monday
+167,Friday
+168,EVIL INC - weekly - Wednesday
+169,EVIL INC
+170,weekly
+171,Wednesday
+172,Monday
+173,Friday
+174,EVIL INC - weekly - Wednesday
+175,EVIL INC
+176,weekly
+177,Wednesday
+178,Monday
+179,Friday
+180,EVIL INC - weekly - Wednesday
+181,EVIL INC
+182,weekly
+183,Wednesday
+184,Monday
+185,Friday
+186,EVIL INC - weekly - Wednesday
+187,EVIL INC
+188,weekly
+189,Wednesday
+190,Monday
+191,Friday
+192,EVIL INC - weekly - Wednesday
+193,EVIL INC
+194,weekly
+195,Wednesday
+196,Monday
+197,Friday
+198,EVIL INC - weekly - Wednesday
+199,EVIL INC
+200,weekly
+201,Wednesday
+202,Monday
+203,Friday
+204,EVIL INC - weekly - Wednesday
+205,EVIL INC
+206,weekly
+207,Wednesday
+208,Monday
+209,Friday
+210,EVIL INC - weekly - Wednesday
+211,EVIL INC
+212,weekly
+213,Wednesday
+214,Monday
+215,Friday
+216,EVIL INC - weekly - Wednesday
+217,EVIL INC
+218,weekly
+219,Wednesday
+220,Monday
+221,Friday
+222,EVIL INC - weekly - Wednesday
+223,EVIL INC
+224,weekly
+225,Wednesday
+226,Monday
+227,Friday
+228,EVIL INC - weekly - Wednesday
+229,EVIL INC
+230,weekly
+231,Wednesday
+232,Monday
+233,Friday
+234,EVIL INC - weekly - Wednesday
+235,EVIL INC
+236,weekly
+237,Wednesday
+238,Monday
+239,Friday
+240,EVIL INC - weekly - Wednesday
+241,EVIL INC
+242,weekly
+243,Wednesday
+244,Monday
+245,Friday
+246,EVIL INC - weekly - Wednesday
+247,EVIL INC
+248,weekly
+249,Wednesday
+250,Monday
+251,Friday
+252,EVIL INC - weekly - Wednesday
+253,EVIL INC
+254,weekly
+255,Wednesday
+256,Monday
+257,Friday
+258,EVIL INC - weekly - Wednesday
+259,EVIL INC
+260,weekly
+261,Wednesday
+262,Monday
+263,Friday
+264,EVIL INC - weekly - Wednesday
+265,EVIL INC
+266,weekly
+267,Wednesday
+268,Monday
+269,Friday
+270,EVIL INC - weekly - Wednesday
+271,EVIL INC
+272,weekly
+273,Wednesday
+274,Monday
+275,Friday
+276,EVIL INC - weekly - Wednesday
+277,EVIL INC
+278,weekly
+279,Wednesday
+280,Monday
+281,Friday
+282,EVIL INC - weekly - Wednesday
+283,EVIL INC
+284,weekly
+285,Wednesday
+286,Monday
+287,Friday
+288,EVIL INC - weekly - Wednesday
+289,EVIL INC
+290,weekly
+291,Wednesday
+292,Monday
+293,Friday
+294,EVIL INC - weekly - Wednesday
+295,EVIL INC
+296,weekly
+297,Wednesday
+298,Monday
+299,Friday
+300,EVIL INC - weekly - Wednesday
+301,EVIL INC
+302,weekly
+303,Wednesday
+304,Monday
+305,Friday
+306,EVIL INC - weekly - Wednesday
+307,EVIL INC
+308,weekly
+309,Wednesday
+310,Monday
+311,Friday
+312,WEYLAND YUTANI - weekly - FRIDAY
+313,WEYLAND YUTANI
+314,weekly
+315,FRIDAY
+316,2019-10-02
+317,2019-10-04
+318,WEYLAND YUTANI - weekly - FRIDAY
+319,WEYLAND YUTANI
+320,weekly
+321,FRIDAY
+322,2019-10-02
+323,2019-10-04
+324,WEYLAND YUTANI - weekly - FRIDAY
+325,WEYLAND YUTANI
+326,weekly
+327,FRIDAY
+328,2019-10-02
+329,2019-10-04
+330,WEYLAND YUTANI - weekly - FRIDAY
+331,WEYLAND YUTANI
+332,weekly
+333,FRIDAY
+334,2019-10-02
+335,2019-10-04
+336,WEYLAND YUTANI - weekly - FRIDAY
+337,WEYLAND YUTANI
+338,weekly
+339,FRIDAY
+340,2019-10-02
+341,2019-10-04
+342,WEYLAND YUTANI - weekly - FRIDAY
+343,WEYLAND YUTANI
+344,weekly
+345,FRIDAY
+346,2019-10-02
+347,2019-10-04
+348,WEYLAND YUTANI - weekly - FRIDAY
+349,WEYLAND YUTANI
+350,weekly
+351,FRIDAY
+352,2019-10-02
+353,2019-10-04
+354,WEYLAND YUTANI - weekly - FRIDAY
+355,WEYLAND YUTANI
+356,weekly
+357,FRIDAY
+358,2019-10-02
+359,2019-10-04
+360,WEYLAND YUTANI - weekly - FRIDAY
+361,WEYLAND YUTANI
+362,weekly
+363,FRIDAY
+364,2019-10-02
+365,2019-10-04
+366,WEYLAND YUTANI - weekly - FRIDAY
+367,WEYLAND YUTANI
+368,weekly
+369,FRIDAY
+370,2019-10-02
+371,2019-10-04
+372,WEYLAND YUTANI - weekly - FRIDAY
+373,WEYLAND YUTANI
+374,weekly
+375,FRIDAY
+376,2019-10-02
+377,2019-10-04
+378,WEYLAND YUTANI - weekly - FRIDAY
+379,WEYLAND YUTANI
+380,weekly
+381,FRIDAY
+382,2019-10-02
+383,2019-10-04
+384,WEYLAND YUTANI - weekly - FRIDAY
+385,WEYLAND YUTANI
+386,weekly
+387,FRIDAY
+388,2019-10-02
+389,2019-10-04
+390,WEYLAND YUTANI - weekly - FRIDAY
+391,WEYLAND YUTANI
+392,weekly
+393,FRIDAY
+394,2019-10-02
+395,2019-10-04
+396,WEYLAND YUTANI - weekly - FRIDAY
+397,WEYLAND YUTANI
+398,weekly
+399,FRIDAY
+400,2019-10-02
+401,2019-10-04
+402,WEYLAND YUTANI - weekly - FRIDAY
+403,WEYLAND YUTANI
+404,weekly
+405,FRIDAY
+406,2019-10-02
+407,2019-10-04
+408,WEYLAND YUTANI - weekly - FRIDAY
+409,WEYLAND YUTANI
+410,weekly
+411,FRIDAY
+412,2019-10-02
+413,2019-10-04
+414,WEYLAND YUTANI - weekly - FRIDAY
+415,WEYLAND YUTANI
+416,weekly
+417,FRIDAY
+418,2019-10-02
+419,2019-10-04
+420,WEYLAND YUTANI - weekly - FRIDAY
+421,WEYLAND YUTANI
+422,weekly
+423,FRIDAY
+424,2019-10-02
+425,2019-10-04
+426,WEYLAND YUTANI - weekly - FRIDAY
+427,WEYLAND YUTANI
+428,weekly
+429,FRIDAY
+430,2019-10-02
+431,2019-10-04
+432,WEYLAND YUTANI - weekly - FRIDAY
+433,WEYLAND YUTANI
+434,weekly
+435,FRIDAY
+436,2019-10-02
+437,2019-10-04
+438,WEYLAND YUTANI - weekly - FRIDAY
+439,WEYLAND YUTANI
+440,weekly
+441,FRIDAY
+442,2019-10-02
+443,2019-10-04
+444,WEYLAND YUTANI - weekly - FRIDAY
+445,WEYLAND YUTANI
+446,weekly
+447,FRIDAY
+448,2019-10-02
+449,2019-10-04
+450,WEYLAND YUTANI - weekly - FRIDAY
+451,WEYLAND YUTANI
+452,weekly
+453,FRIDAY
+454,2019-10-02
+455,2019-10-04
+456,WEYLAND YUTANI - weekly - FRIDAY
+457,WEYLAND YUTANI
+458,weekly
+459,FRIDAY
+460,2019-10-02
+461,2019-10-04
+462,WEYLAND YUTANI - weekly - FRIDAY
+463,WEYLAND YUTANI
+464,weekly
+465,FRIDAY
+466,2019-10-02
+467,2019-10-04
+468,WEYLAND YUTANI - weekly - FRIDAY
+469,WEYLAND YUTANI
+470,weekly
+471,FRIDAY
+472,2019-10-02
+473,2019-10-04
+474,WEYLAND YUTANI - weekly - FRIDAY
+475,WEYLAND YUTANI
+476,weekly
+477,FRIDAY
+478,2019-10-02
+479,2019-10-04
+480,WEYLAND YUTANI - weekly - FRIDAY
+481,WEYLAND YUTANI
+482,weekly
+483,FRIDAY
+484,2019-10-02
+485,2019-10-04
+486,WEYLAND YUTANI - weekly - FRIDAY
+487,WEYLAND YUTANI
+488,weekly
+489,FRIDAY
+490,2019-10-02
+491,2019-10-04
+492,WEYLAND YUTANI - weekly - FRIDAY
+493,WEYLAND YUTANI
+494,weekly
+495,FRIDAY
+496,2019-10-02
+497,2019-10-04
+498,WEYLAND YUTANI - weekly - FRIDAY
+499,WEYLAND YUTANI
+500,weekly
+501,FRIDAY
+502,2019-10-02
+503,2019-10-04
+504,WEYLAND YUTANI - weekly - FRIDAY
+505,WEYLAND YUTANI
+506,weekly
+507,FRIDAY
+508,2019-10-02
+509,2019-10-04
+510,WEYLAND YUTANI - weekly - FRIDAY
+511,WEYLAND YUTANI
+512,weekly
+513,FRIDAY
+514,2019-10-02
+515,2019-10-04
+516,WEYLAND YUTANI - weekly - FRIDAY
+517,WEYLAND YUTANI
+518,weekly
+519,FRIDAY
+520,2019-10-02
+521,2019-10-04
+522,WEYLAND YUTANI - weekly - FRIDAY
+523,WEYLAND YUTANI
+524,weekly
+525,FRIDAY
+526,2019-10-02
+527,2019-10-04
+528,WEYLAND YUTANI - weekly - FRIDAY
+529,WEYLAND YUTANI
+530,weekly
+531,FRIDAY
+532,2019-10-02
+533,2019-10-04
+534,WEYLAND YUTANI - weekly - FRIDAY
+535,WEYLAND YUTANI
+536,weekly
+537,FRIDAY
+538,2019-10-02
+539,2019-10-04
+540,WEYLAND YUTANI - weekly - FRIDAY
+541,WEYLAND YUTANI
+542,weekly
+543,FRIDAY
+544,2019-10-02
+545,2019-10-04
+546,WEYLAND YUTANI - weekly - FRIDAY
+547,WEYLAND YUTANI
+548,weekly
+549,FRIDAY
+550,2019-10-02
+551,2019-10-04
+552,WEYLAND YUTANI - weekly - FRIDAY
+553,WEYLAND YUTANI
+554,weekly
+555,FRIDAY
+556,2019-10-02
+557,2019-10-04
+558,WEYLAND YUTANI - weekly - FRIDAY
+559,WEYLAND YUTANI
+560,weekly
+561,FRIDAY
+562,2019-10-02
+563,2019-10-04
+564,WEYLAND YUTANI - weekly - FRIDAY
+565,WEYLAND YUTANI
+566,weekly
+567,FRIDAY
+568,2019-10-02
+569,2019-10-04
+570,WEYLAND YUTANI - weekly - FRIDAY
+571,WEYLAND YUTANI
+572,weekly
+573,FRIDAY
+574,2019-10-02
+575,2019-10-04
+576,WEYLAND YUTANI - weekly - FRIDAY
+577,WEYLAND YUTANI
+578,weekly
+579,FRIDAY
+580,2019-10-02
+581,2019-10-04
+582,WEYLAND YUTANI - weekly - FRIDAY
+583,WEYLAND YUTANI
+584,weekly
+585,FRIDAY
+586,2019-10-02
+587,2019-10-04
+588,WEYLAND YUTANI - weekly - FRIDAY
+589,WEYLAND YUTANI
+590,weekly
+591,FRIDAY
+592,2019-10-02
+593,2019-10-04
+594,WEYLAND YUTANI - weekly - FRIDAY
+595,WEYLAND YUTANI
+596,weekly
+597,FRIDAY
+598,2019-10-02
+599,2019-10-04
+600,WEYLAND YUTANI - weekly - FRIDAY
+601,WEYLAND YUTANI
+602,weekly
+603,FRIDAY
+604,2019-10-02
+605,2019-10-04
+606,WEYLAND YUTANI - weekly - FRIDAY
+607,WEYLAND YUTANI
+608,weekly
+609,FRIDAY
+610,2019-10-02
+611,2019-10-04
+612,WEYLAND YUTANI - weekly - FRIDAY
+613,WEYLAND YUTANI
+614,weekly
+615,FRIDAY
+616,2019-10-02
+617,2019-10-04
+618,WEYLAND YUTANI - weekly - FRIDAY
+619,WEYLAND YUTANI
+620,weekly
+621,FRIDAY
+622,2019-10-02
+623,2019-10-04
