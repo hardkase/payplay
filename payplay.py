@@ -23,13 +23,11 @@ class Data_Handler(object):
         print("Print Complete!")
 
 class Job_Handler(object):
-    # experiment extending data object
     def __init__(self, job, date_data):
         self.job = job 
         self.first_run = job  # This will be the first processed job of any given jobtype
         self.first_list = []
         self.date_data = date_data
-        # self.truth = tru
         self.jobtype = job["FREQUENCY"]
         self.jobruns = []
         self.joblists = []
@@ -46,14 +44,12 @@ def main():
     alljobs = pd.DataFrame(columns=con.COLUMN_NAMES)
     today = dt.date.today()
     data = util.feed_pandas("{0}{1}{2}".format(PATHDATA[0], PATHDATA[2], PATHDATA[3]))
-    # dator = Data_Handler(today, data)
     data = util.fix_columns(data)
     data.data = util.insert_column(data, 0, "SUMMARY", "Summary Goes Here")
     data = util.to_lower(data)
     truth = data
     dator = Data_Handler(today, data)
     dator.print()
-    # weekly = dator.data["FREQUENCY"] ==("weekly")
     weekly = dator.data.loc[dator.data['FREQUENCY']=="weekly"]
     monthly = dator.data.loc[dator.data['FREQUENCY']=="monthly"]
     qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly"]
@@ -72,48 +68,20 @@ def main():
         print("DEBUG - JOB FREQ: ", jobject.jobtype)
         if jobject.jobtype == "weekly":
             jobject = util.process_weekly(jobject)
-        elif jobject.jobtype == "quarterly":
-            pass
-            # jobject = util.process_qtr(jobject)
-        elif jobject.jobtype == "quarterly-after":
-            pass
-            # jobject = util.process_qtr_aft(jobject)
+        elif "quarterly" in jobject.jobtype:
+            jobject = util.process_qtr(jobject)
         else:
             pass
         
         for item in jobject.jobruns:
             alljobs.append(item)
-        # alljobs.append(jobject.jobruns)
-        # for item in jobject.jobruns:
-            # print("JOB INDEX: ", len(item.index))
-        # holder = pd.Dataframe([alljobs], columns=)
-    # for item in alljobs:
-        # print("DEBUG: ", item)
     final = pd.DataFrame(alljobs, columns=con.FINAL_COLUMNS)
     print("FINAL INDEX LEN {0}, COL LEN {1}".format(len(final.index), len(final.columns)))
     for item in final.columns:
         print(item)
     print("INDEX LEN: ", len(final.columns))
-    #for item in final.columns:
-         
-    # final.columns = con.FINAL_COLUMNS
-    final_list = pd.DataFrame([alljob_lists])
-    final_list = final_list.transpose()
-    # final = final.transpose()
-    """
-    for i in range(len(final.columns)):
-        if final.columns[i] not in con.FINAL_COLUMNS:
-            final = final.drop(final.columns[i], axis=1)
-    """
     util.csvmaker(final, "shit_series", PATHDATA)
-    util.csvmaker(final_list, "shitlists", PATHDATA)
-    # final.columns = con.FINAL_COLUMNS
     print("DEBUG - SERIES - DO WE GET OUTPUT? ", final)
-            # jobject = util.process_monthly(jobject)
-        # print("DEBUG - JOBJECT", job.jobtype)
-    # jobject = JobHandler(dator)
-    # for i in range(len())
-    # This is all working, ready to start processing each job type...
 if __name__ == '__main__':
     main()
 

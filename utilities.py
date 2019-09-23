@@ -75,24 +75,14 @@ def process_qtr(jobhandler):
     for a in range(0, 4):
         push = a
         if a < 1:
-            first_run = init_qtr(newjob)
+            date_data = jobhandler.date_data
+            freq = jobhandler.jobtype
+            first_run = init_qtr(newjob, date_data, freq)
             jobhandler.first_run = first_run
             jobhandler.jobruns.append(first_run)
         else:
             current_job = run_qtr(jobhandler.first_run, push)
-            jobhandler.jobruns.append(current_job)
-    return jobhandler
-
-def process_qtr_aft(jobhandler):
-    newjob = jobhandler.job
-    for a in range(0, 4):
-        push = a
-        if a < 1:
-            first_run = init_qtr_aft(newjob, jobhandler.date_data)
-            jobhandler.first_run = first_run
-            jobhandler.jobruns.append(first_run)
-        else:
-            current_job = run_qtr_aft(jobhandler.first_run, push)
+            current_job = build_summary(current_job)
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
@@ -142,17 +132,40 @@ def init_monthly(newjob):
 def run_monthly(first_run, push):
     pass
 
-def init_qtr(newjob):
-    pass
+def init_qtr(newjob, date_data, freq):
+    year = date_data[1]
+    qtr = date_data[5]
+    qtr_data = get_qtr(qtr)
+    qtr_month = qtr_data[1]
+    for j in range(len(newjob.index)):
+        if newjob.index[j] in con.TARGETS:
+            if freq == "quarterly-after":
+                qtr_data = get_qtr_aft(qtr)
+                qtr_month = qtr_data[0]
+            else:
+                qtr_data = get_qtr(qtr)
+                qtr_month = qtr_data[1]
+            value = newjob[j]
+            if isinstance(value, str):
+                if "lwd" in value:
+                    lwd = get_lwd(qtr_month, year)
+                    newdate = date_builder(year, qtr_month, lwd)
+                    newjob[j] = newdate
+            elif isinstance(value, int):
+                newdate = date_builder(year, qtr_month, value)
+                newjob[j] = newdate
+    return newjob
 
 def run_qtr(first_run, push):
-    pass
+    nextjob = first_run
+    for j in range(len(nextjob.index)):
+        if nextjob.index[j] in con.TARGETS:
+            if isinstance(nextjob[j], dt.date):
+                modifier = 3 * push
+                newdate = nextjob[j] + relativedelta(months=+modifier)
+                nextjob[j] = newdate
+    return nextjob
 
-def init_qtr_aft(newjob):
-    pass
-
-def run_qtr_aft(first_run, push):
-    pass
 
 def get_weekly_date(value, date_data):
     if value in con.WEEKDAYLIST:
@@ -171,6 +184,17 @@ def get_weekly_date(value, date_data):
         value = value
     return value
 
+def get_qtr(qtr):
+    qtr_data = con.QUARTERS.get(qtr)
+    return qtr_data
+
+def get_qtr_aft(qtr):
+    qtr = qtr + 1
+    if qtr > 4:
+        qtr = qtr - 4
+    qtr_data = get_qtr(qtr)
+    return qtr_data
+    
 def build_summary(job):
     client = job[1]
     freq = job[2]
@@ -178,6 +202,22 @@ def build_summary(job):
     summary = "{0} - {1} - {2}".format(client, freq, pay)
     job[0] = summary
     return job
+
+def get_lwd(month, year):
+    value = monthrange(year, month)
+    lwd = value[1]
+    return lwd
+
+def date_builder(year, month, day):
+    try:
+        newdate = dt.date(year, month, day)
+    except ValueError as er1:
+        print("INPUTS INCORRECT", er1)
+        newdate = "NULL"
+    except ValueError as er2:
+        print("INPUTS INCORRECT", er2)
+        newdate = "NULL"
+    return newdate
 
 def listify(job):
     newlist = []
