@@ -1,11 +1,11 @@
-,SUMMARY,CLIENT,FREQUENCY,PAY_DATE,INPUTS_DUE,SEND_REPORTS
-0,summary goes here,acme inc,monthly,lwd,lwd -7,lwd
-1,summary goes here,damage inc,monthly,lwd - 5,15,18
-2,summary goes here,evil inc,weekly,wednesday,monday,friday
-3,summary goes here,umbrella llc,montlhly,15,12,18
-4,summary goes here,tyrell corp,monthly,28,25,30
-5,summary goes here,weyland yutani,weekly,friday,wednesday,friday
-6,summary goes here,evil corp,monthly,7,2,9
-7,summary goes here,agent inc,quarterly,lwd,22,lwd
-8,summary goes here,wayne enterprises,quarterly-after,15,1,5
-9,summary goes here,stark technologies,quarterly,25,15,28
+,CLIENT,FREQUENCY,PAY_DATE,INPUTS_DUE,SEND_REPORTS
+0,acme inc,monthly,lwd,lwd -7,lwd
+1,damage inc,monthly,lwd - 5,15,18
+2,evil inc,weekly,wednesday,monday,friday
+3,umbrella llc,montlhly,15,12,18
+4,tyrell corp,monthly,28,25,30
+5,weyland yutani,weekly,friday,wednesday,friday
+6,evil corp,monthly,7,2,9
+7,agent inc,quarterly,lwd,22,lwd
+8,wayne enterprises,quarterly-after,15,1,5
+9,stark technologies,quarterly,25,15,28

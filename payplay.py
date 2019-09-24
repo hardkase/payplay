@@ -15,6 +15,9 @@ class Data_Handler(object):
         self.wkday = today.weekday()
         self.qtr = pd.Timestamp(today).quarter
         self.date_data = [self.today, self.year, self.month, self.day, self.wkday, self.qtr]
+        self.qtrly = pd.DataFrame()
+        self.monthly = pd.DataFrame()
+        self.weekly = pd.DataFrame()
     def print(self):
         print("Current Data:")
         print("Today's Date: {0}\nYear: {1}\nMonth: {2}\nDay: {3}\nWeekday: {4}\nQuarter: {5}".format(self.today, self.year, self.month, self.day, self.wkday, self.qtr))
@@ -44,44 +47,50 @@ def main():
     alljobs = pd.DataFrame(columns=con.COLUMN_NAMES)
     today = dt.date.today()
     data = util.feed_pandas("{0}{1}{2}".format(PATHDATA[0], PATHDATA[2], PATHDATA[3]))
+    print("DEBUG data 0 - create DF: ", data)
     data = util.fix_columns(data)
-    data.data = util.insert_column(data, 0, "SUMMARY", "Summary Goes Here")
-    data = util.to_lower(data)
-    truth = data
+    print("DEBUG data 1 - normalize columns: ", data)
+    data = data.apply(lambda x: x.astype(str).str.lower())
+    print("DEBUG data 1 - reduce all str vals to lower: ", data)
+    # data = data.insert(0, "SUMMARY", 0)
+    data = util.insert_column(data, data.columns[0],"SUMMARY", 0)
+    print("DEBUG data 1 - insert column @ loc[0], add data ", data)
+    # truth = data
     dator = Data_Handler(today, data)
-    dator.print()
-    weekly = dator.data.loc[dator.data['FREQUENCY']=="weekly"]
-    monthly = dator.data.loc[dator.data['FREQUENCY']=="monthly"]
-    qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly"]
-    qtrly_aft = dator.data.loc[dator.data['FREQUENCY']=="quarterly-after"]
-    print("DEBUG - WEEKLY:\n", weekly)
-    print("DEBUG - MONTHLY:\n", monthly)
-    print("DEBUG - QUARTERLY:\n", qtrly)
-    print("DEBUG - QUARTERLY-AFTER:\n", qtrly_aft)
+    # dator.print()
+    # these are DFs
+    dator.weekly = dator.data.loc[dator.data['FREQUENCY']=="weekly"]
+    dator.monthly = dator.data.loc[dator.data['FREQUENCY']=="monthly"]
+    dator.qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly" or dator.data["FREQUENCY"]== "quarterly-aft"]
+    # end DFs
+    print("DEBUG - WEEKLY:\n", dator.weekly)
+    print("DEBUG - MONTHLY:\n", dator.monthly)
+    print("DEBUG - QUARTERLY:\n", dator.qtrly)
     util.csvmaker(data, "test", PATHDATA)
     alljobs = []
-    alljob_lists = []
-    for a in range(len(dator.data.index)):
-        job = dator.data.iloc[a]
-        print("JOB DETAILS: ", job)
+    # adapt loop to focus on qtrly
+    # for a in range(len(dator.data.index)):
+    for a in range(len(dator.qtrly.index)):
+        # job = dator.data.iloc[a]`
+        job = dator.qtrly.iloc[a]
+        # print("JOB DETAILS: ", job)
         jobject = Job_Handler(job, dator.date_data)
-        print("DEBUG - JOB FREQ: ", jobject.jobtype)
+        # print("DEBUG - JOB FREQ: ", jobject.jobtype)
         if jobject.jobtype == "weekly":
             jobject = util.process_weekly(jobject)
         elif "quarterly" in jobject.jobtype:
             jobject = util.process_qtr(jobject)
         else:
             pass
-        
         for item in jobject.jobruns:
             alljobs.append(item)
     final = pd.DataFrame(alljobs, columns=con.FINAL_COLUMNS)
-    print("FINAL INDEX LEN {0}, COL LEN {1}".format(len(final.index), len(final.columns)))
+    # print("FINAL INDEX LEN {0}, COL LEN {1}".format(len(final.index), len(final.columns)))
     for item in final.columns:
         print(item)
-    print("INDEX LEN: ", len(final.columns))
+    # print("INDEX LEN: ", len(final.columns))
     util.csvmaker(final, "shit_series", PATHDATA)
-    print("DEBUG - SERIES - DO WE GET OUTPUT? ", final)
+    # print("DEBUG - SERIES - DO WE GET OUTPUT? ", final)
 if __name__ == '__main__':
     main()
 

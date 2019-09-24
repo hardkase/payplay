@@ -23,37 +23,51 @@ def fix_columns(data):
     return data
 
 def insert_column(data, index_pos, col_name, value):
-    data = data.insert(index_pos, col_name, value)
+    print("DEBUG - data", data)
+    print("DEBUG - index pos", index_pos)
+    print("DEBUG - col", col_name)
+    print("DEBUG - value to be filled", value)
+    try:
+        data = data.insert(index_pos, col_name, value)
+    except:
+        print("MOT WORKING")
+    print("DEBUG - end result insert col - ", data)
     return data
-
-def to_lower(data):
+"""
+def to_lower():
     # there has to be an easier way to do this ...
-    for i in range(len(data.index)):
-        series = data.iloc[i]
-        series.str.lower
-        for j in range(len(series.index)):
-            val = series[j]
-            if isinstance(val, str):
-                series[j] = val.lower()
-        data.iloc[i] = series
-        print("DEBUG: ", series)
-    return data
+    for j in row
+    if x.dtype == "unicode":
+        x = x.str.lower()
+    else:
+        x = x
+    return x
 
+def tolow(data):
+    for x in range(len(data.index)):
+        row = data.iloc[x]
+        fixed_row = row.apply(to_lower())
+        data[x] = fixed_row
+    return data
+"""
 # YES, could simplify this to one function 'process', push range values to a dict in constants
 # and pass in range values based on jobtype...maybe later
 def process_weekly(jobhandler):
     newjob = jobhandler.job
     for a in range(0, 52):
         push = a
+        print("DEBUG - ITERATION #: ", push)
         if a < 1:
             first_run = newjob
             first_run = init_weekly(first_run, jobhandler.date_data)
             # first_list = listify(newjob)
             jobhandler.first_run = first_run
+            first_run = build_summary(first_run)
             jobhandler.jobruns.append(first_run) # add series to list
         else:
             current_job = jobhandler.first_run # series
             current_job = run_weekly(current_job, push) # handle series
+            current_job = build_summary(current_job)
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
@@ -61,6 +75,7 @@ def process_monthly(jobhandler):
     newjob = jobhandler.job
     for a in range(0, 12):
         push = a
+        print("DEBUG - ITERATION #: ", push)
         if a < 1:
             first_run = init_monthly(newjob)
             jobhandler.first_run = first_run
@@ -74,10 +89,12 @@ def process_qtr(jobhandler):
     newjob = jobhandler.job
     for a in range(0, 4):
         push = a
+        print("DEBUG - ITERATION #: ", push)
         if a < 1:
             date_data = jobhandler.date_data
             freq = jobhandler.jobtype
             first_run = init_qtr(newjob, date_data, freq)
+            first_run = build_summary(first_run)
             jobhandler.first_run = first_run
             jobhandler.jobruns.append(first_run)
         else:
@@ -91,6 +108,7 @@ def init_list_weekly(newjob, date_data):
         value = newjob[i]
         if con.FINAL_COLUMNS[i] in con.TARGETS:
             value = get_weekly_date(value, date_data)
+            print("WEEKLY DATE CHECK: ", value)
         newjob[i] = value
         newjob = build_summary(newjob)
     return newjob
@@ -100,8 +118,8 @@ def init_weekly(newjob, date_data):
         value = newjob[i]
         if newjob.index[i] in con.TARGETS:
             value = get_weekly_date(value, date_data)
+        print("WEEKLY DATE CHECK: ", value)
         newjob[i] = value
-        newjob = build_summary(newjob)
     return newjob
 
 def run_weekly_list(first_list, push):
@@ -112,7 +130,6 @@ def run_weekly_list(first_list, push):
             change = 7 * push
             value = value + relativedelta(days=+change)
             nextwk[c] = value
-            nextwk = build_summary(nextwk)
         return nextwk
         
 def run_weekly(first_run, push):
@@ -122,8 +139,8 @@ def run_weekly(first_run, push):
         if first_run.index[c] in con.TARGETS:
             change = 7 * push
             value = value + relativedelta(days=+change)
+            print("WEEKLY DATE CHECK: ", value)
             nextwk[c] = value
-            nextwk = build_summary(nextwk)
         return nextwk
 
 def init_monthly(newjob):
@@ -163,6 +180,7 @@ def run_qtr(first_run, push):
             if isinstance(nextjob[j], dt.date):
                 modifier = 3 * push
                 newdate = nextjob[j] + relativedelta(months=+modifier)
+                print("QUARTERLY DATE CHECK: ", newdate)
                 nextjob[j] = newdate
     return nextjob
 
@@ -196,11 +214,11 @@ def get_qtr_aft(qtr):
     return qtr_data
     
 def build_summary(job):
-    client = job[1]
-    freq = job[2]
-    pay = job[3]
+    client = job["CLIENT"]
+    freq = job["FREQUENCY"]
+    pay = job["PAY_DATE"]
     summary = "{0} - {1} - {2}".format(client, freq, pay)
-    job[0] = summary
+    job["SUMMARY"] = summary
     return job
 
 def get_lwd(month, year):
