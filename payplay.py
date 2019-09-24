@@ -15,9 +15,7 @@ class Data_Handler(object):
         self.wkday = today.weekday()
         self.qtr = pd.Timestamp(today).quarter
         self.date_data = [self.today, self.year, self.month, self.day, self.wkday, self.qtr]
-        self.qtrly = pd.DataFrame()
-        self.monthly = pd.DataFrame()
-        self.weekly = pd.DataFrame()
+        self.dflist = []
     def print(self):
         print("Current Data:")
         print("Today's Date: {0}\nYear: {1}\nMonth: {2}\nDay: {3}\nWeekday: {4}\nQuarter: {5}".format(self.today, self.year, self.month, self.day, self.wkday, self.qtr))
@@ -53,26 +51,19 @@ def main():
     data = data.apply(lambda x: x.astype(str).str.lower())
     print("DEBUG data 1 - reduce all str vals to lower: ", data)
     # data = data.insert(0, "SUMMARY", 0)
-    data = util.insert_column(data, data.columns[0],"SUMMARY", 0)
+    data = data.reindex(con.FINAL_COLUMNS, axis=1)
     print("DEBUG data 1 - insert column @ loc[0], add data ", data)
     # truth = data
     dator = Data_Handler(today, data)
     # dator.print()
     # these are DFs
-    dator.weekly = dator.data.loc[dator.data['FREQUENCY']=="weekly"]
-    dator.monthly = dator.data.loc[dator.data['FREQUENCY']=="monthly"]
-    dator.qtrly = dator.data.loc[dator.data['FREQUENCY']=="quarterly" or dator.data["FREQUENCY"]== "quarterly-aft"]
-    # end DFs
-    print("DEBUG - WEEKLY:\n", dator.weekly)
-    print("DEBUG - MONTHLY:\n", dator.monthly)
-    print("DEBUG - QUARTERLY:\n", dator.qtrly)
     util.csvmaker(data, "test", PATHDATA)
     alljobs = []
     # adapt loop to focus on qtrly
     # for a in range(len(dator.data.index)):
-    for a in range(len(dator.qtrly.index)):
+    for a in range(len(dator.data.index)):
         # job = dator.data.iloc[a]`
-        job = dator.qtrly.iloc[a]
+        job = dator.data.iloc[a]
         # print("JOB DETAILS: ", job)
         jobject = Job_Handler(job, dator.date_data)
         # print("DEBUG - JOB FREQ: ", jobject.jobtype)
@@ -85,6 +76,12 @@ def main():
         for item in jobject.jobruns:
             alljobs.append(item)
     final = pd.DataFrame(alljobs, columns=con.FINAL_COLUMNS)
+    weekly = final.loc[dator.data['FREQUENCY']=="weekly"]
+    monthly = final.loc[dator.data['FREQUENCY']=="monthly"]
+    qtrly = final.loc[dator.data['FREQUENCY']=="quarterly"]
+    qtrly_aft = final.loc[dator.data["FREQUENCY"]=="quarterly_after"]
+    qtr = pd.concat([qtrly, qtrly_aft], ignore_index=True)
+    dator.dflist = [weekly, monthly, qtr]
     # print("FINAL INDEX LEN {0}, COL LEN {1}".format(len(final.index), len(final.columns)))
     for item in final.columns:
         print(item)

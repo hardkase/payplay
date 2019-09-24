@@ -21,7 +21,8 @@ def csvmaker(data, name, PATHDATA):
 def fix_columns(data):
     data.columns = con.COLUMN_NAMES
     return data
-
+"""
+ended up using reindex in main as this didn't want to work for me
 def insert_column(data, index_pos, col_name, value):
     print("DEBUG - data", data)
     print("DEBUG - index pos", index_pos)
@@ -30,10 +31,9 @@ def insert_column(data, index_pos, col_name, value):
     try:
         data = data.insert(index_pos, col_name, value)
     except:
-        print("MOT WORKING")
+        print("NOT WORKING")
     print("DEBUG - end result insert col - ", data)
     return data
-"""
 def to_lower():
     # there has to be an easier way to do this ...
     for j in row
@@ -68,6 +68,7 @@ def process_weekly(jobhandler):
             current_job = jobhandler.first_run # series
             current_job = run_weekly(current_job, push) # handle series
             current_job = build_summary(current_job)
+            jobhandler.first_run = current_job
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
@@ -100,6 +101,7 @@ def process_qtr(jobhandler):
         else:
             current_job = run_qtr(jobhandler.first_run, push)
             current_job = build_summary(current_job)
+            jobhandler.first_run = current_job
             jobhandler.jobruns.append(current_job)
     return jobhandler
 
@@ -127,19 +129,23 @@ def run_weekly_list(first_list, push):
     for c in range (len(nextwk)):
         value = nextwk[c]
         if con.FINAL_COLUMNS[c] in con.TARGETS:
-            change = 7 * push
-            value = value + relativedelta(days=+change)
+            # change = 7 * push
+            value = value + relativedelta(weeks=+1)
             nextwk[c] = value
         return nextwk
         
 def run_weekly(first_run, push):
+    print("DEBUG, iter higher than 0 - date should change")
     nextwk = first_run
+    print("DEBUG idx len", len(nextwk.index))
     for c in range (len(nextwk.index)):
+        print("DEBUG: col: {0}, iter: {1}, val: {2}".format(nextwk.index[c], c, nextwk[c]))
         value = nextwk[c]
-        if first_run.index[c] in con.TARGETS:
-            change = 7 * push
-            value = value + relativedelta(days=+change)
-            print("WEEKLY DATE CHECK: ", value)
+        if c in [3,4,5]:
+            # change = 7 * push
+            print("DEBUG - value - should be a date{0} just to be sure, type: {1}".format(value, type(value)))
+            value = value + relativedelta(weeks=+1)
+            print("WEEKLY DATE CHECK: SHOULD BE ONE WEEK LATER ", value)
             nextwk[c] = value
         return nextwk
 
@@ -168,7 +174,7 @@ def init_qtr(newjob, date_data, freq):
                     lwd = get_lwd(qtr_month, year)
                     newdate = date_builder(year, qtr_month, lwd)
                     newjob[j] = newdate
-            elif isinstance(value, int):
+            elif isinstance(value, np.int64):
                 newdate = date_builder(year, qtr_month, value)
                 newjob[j] = newdate
     return newjob
@@ -178,7 +184,7 @@ def run_qtr(first_run, push):
     for j in range(len(nextjob.index)):
         if nextjob.index[j] in con.TARGETS:
             if isinstance(nextjob[j], dt.date):
-                modifier = 3 * push
+                modifier = 3
                 newdate = nextjob[j] + relativedelta(months=+modifier)
                 print("QUARTERLY DATE CHECK: ", newdate)
                 nextjob[j] = newdate
