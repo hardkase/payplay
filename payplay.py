@@ -51,7 +51,9 @@ def main():
     data = data.apply(lambda x: x.astype(str).str.lower())
     print("DEBUG data 1 - reduce all str vals to lower: ", data)
     # data = data.insert(0, "SUMMARY", 0)
-    data = data.reindex(con.FINAL_COLUMNS, axis=1)
+    # data = data.reindex(con.FINAL_COLUMNS, axis=1)
+    # data = data.reindex(con.FINAL_COLUMNS, in_place=True)
+    data["SUMMARY"] = "Summary Goes Here"
     print("DEBUG data 1 - insert column @ loc[0], add data ", data)
     # truth = data
     dator = Data_Handler(today, data)
