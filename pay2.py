@@ -27,12 +27,25 @@ QUARTERS = {
 }
 
 def build_summary(job):
-    client = job["CLIENT"]
-    freq = job["FREQUENCY"]
-    pay = job["PAY_DATE"]
+    client = job[1]
+    freq = job[2]
+    pay = job[3]
     summary = "{0} - {1} - {2}".format(client, freq, pay)
-    job["SUMMARY"] = summary
+    job[0] = summary
     return job
+
+def get_lwd(year, month):
+    print("MONTH {0}, YEAR{1}".format(month, year))
+    value = monthrange(year, month)
+    lwd = value[1]
+    return lwd
+
+def get_qtr(qtr):
+    qtr_data = QUARTERS.get(qtr)
+    return qtr_data
+
+def get_current_qtr(date):
+    pass
 
 WEEKDAYLIST = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
@@ -52,27 +65,35 @@ def main():
     # clean
     print(data.columns)
     newcols = ["CLIENT", "FREQUENCY", "PAY_DATE", "INPUTS_DUE", "SEND_REPORTS"]
+    final_cols = ["SUMMARY", "CLIENT", "FREQUENCY", "PAY_DATE", "INPUTS_DUE", "SEND_REPORTS"]
     TARGETS = ["PAY_DATE","INPUTS_DUE", "SEND_REPORTS"]
     print(newcols)
     data.columns = newcols
     print(data)
     data = data.apply(lambda x: x.astype(str).str.lower())
     print(data)
+    """
+    REmove the SUMMAR add...
     newcolz = ["SUMMARY"]
     for item in newcols:
         newcolz.append(item)
     data = data.reindex(newcolz, axis="columns")
+    """
     print(data)
     jobs = []
+    last_job = []
     for i in range(len(data.index)):
         job = data.iloc[i]
-        last_job = job
         if job["FREQUENCY"]=="weekly":
             for a in range(0,52):
+                joblist = []
+                sum1 = "summary"
+                clopy = job
                 if a < 1:
-                    clopy = job
+                    joblist.append(sum1)  # idx 0
                     for b in range(len(clopy.index)):
                         if clopy.index[b] in TARGETS:
+                            print("TEST!")
                             value = clopy[b] # This should be a weekday str
                             valist = [number for number, weekday in WEEKDAYS.items() if weekday == value]
                             paywkday = valist.pop()
@@ -80,27 +101,123 @@ def main():
                             print("CHECK: ", today)
                             firstpay = today + relativedelta(days=+daydiff)
                             print("CHECK2: ", firstpay)
-                            clopy[b] = firstpay
+                            joblist.append(firstpay)
                             # IF THIS DOESN@T WORK, try pushing indent  next 3 down past else and left one level
+                        else:
+                            joblist.append(clopy[b])
                 else:
-                    for c in range(len(last_job.index)):
-                        clopy = last_job
-                        if clopy.index[c] in TARGETS:
-                            oldpaydate = clopy[c]
+                    current = last_job
+                    for c in range(len(current)):
+                        if c in [3,4,5]:
+                            print("TEST 2!")
+                            oldpaydate = current[c]
+                            print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
                             newdate = oldpaydate + relativedelta(weeks=+1)
-                            clopy[c] = newdate
-                    clopy = build_summary(clopy)
-                    jobs.append(clopy)
-                    last_job = clopy
-                clopy = build_summary(clopy)
-                jobs.append(clopy)
-                last_job = clopy
+                            print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
+                            joblist.append(newdate)
+                        else:
+                            joblist.append(current[c])
+                joblist = build_summary(joblist)
+                jobs.append(joblist)
+                last_job = joblist
                 # Remaining stuff goes here
         elif "quarterly" in job["FREQUENCY"]:
-            pass
+            for a in range(0,4):
+                joblist = []
+                sum1 = "summary"
+                clopy = job
+                if clopy["FREQUENCY"].strip() == "quarterly":
+                    if a < 1:
+                        qtr = datedata[5]
+                        qtr_data = get_qtr(qtr)
+                        print("QTR: {0}".format(qtr))
+                        joblist.append(sum1)  # idx 0
+                        for b in range(len(clopy.index)):
+                            if clopy.index[b] in TARGETS:
+                                print("TEST!")
+                                value = clopy[b] # This will be a day of the month or lwd etc
+                                if isinstance(value, str):
+                                    lwd = get_lwd(datedata[1], qtr_data[1])
+                                    newdate = dt.date(datedata[1], qtr_data[1], lwd)
+                                    if value.strip() == "lwd":
+                                        joblist.append(newdate)
+                                    elif re.match(r"lwd-[0-9]", value): 
+                                        modifier = re.split("-", value)
+                                        newdate = newdate + relativedelta(days=-modifier[1])
+                                        joblist.append(newdate)
+                                elif isinstance(value, int):
+                                    newdate = dt.date(datedata[1], qtr_data[1], value)
+                                    joblist.append(newdate)
+                            else:
+                                joblist.append(clopy[b])
+                    else:
+                        current = last_job
+                        for c in range(len(current)):
+                            if c in [3,4,5]:
+                                print("TEST 2!")
+                                oldpaydate = current[c]
+                                print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
+                                newdate = oldpaydate + relativedelta(months=+3)
+                                print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
+                                joblist.append(newdate)
+                            else:
+                                joblist.append(current[c])
+                    joblist = build_summary(joblist)
+                    jobs.append(joblist)
+                    last_job = joblist
+                else:
+                    if a < 1:
+                        qtr = datedata[5]
+                        qtr = qtr + 1
+                        if qtr > 4:
+                            qtr = qtr - 4
+                        qtr_data = get_qtr(qtr)
+                        print("QTR: {0}".format(qtr))
+                        joblist.append(sum1)  # idx 0
+                        for b in range(len(clopy.index)):
+                            if clopy.index[b] in TARGETS:
+                                print("TEST!")
+                                value = clopy[b] # This will be a day of the month or lwd etc
+                                if isinstance(value, int):
+                                    newdate = dt.date(datedata[1], qtr_data[0], value)
+                                    joblist.append(newdate)
+                                elif isinstance(value, str):
+                                    lwd = get_lwd(datedata[1], qtr_data[0])
+                                    newdate = dt.date(datedata[1], qtr_data[0], lwd)
+                                    if value.strip() == "lwd":
+                                        joblist.append(newdate)
+                                    elif re.match(r"lwd-[0-9]", value): 
+                                        print("DATE VALUE:  {0}, TYPE: {1}".format(value, type(value)))
+                                        modifier = re.split("-", value)
+                                        print("DEBUG", modifier)
+                                        newdate = newdate + relativedelta(days=-modifier[1])
+                                        joblist.append(newdate)
+                            else:
+                                joblist.append(clopy[b])
+                    else:
+                        current = last_job
+                        for c in range(len(current)):
+                            if c in [3,4,5]:
+                                print("TEST 2!")
+                                oldpaydate = current[c]
+                                print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
+                                newdate = oldpaydate + relativedelta(months=+3)
+                                print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
+                                joblist.append(newdate)
+                            else:
+                                joblist.append(current[c])
+                    joblist = build_summary(joblist)
+                    jobs.append(joblist)
+                    last_job = joblist
+                
+                # Remaining stuff goes here
         else:
             pass
-    final = pd.DataFrame(jobs, columns=newcolz)
+    print("DEBUG - OUTPUT JOBS")
+    for item in jobs:
+        print("LIST LEN: ", len(item))
+        print("LIST: ", item)
+    final = pd.DataFrame(jobs, columns=final_cols)
     final.to_csv("c:/code/test/tryagain.csv")
 
 if __name__ == '__main__':
