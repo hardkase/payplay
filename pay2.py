@@ -54,7 +54,10 @@ def main():
                             # IF THIS DOESN@T WORK, try pushing indent  next 3 down past else and left one level
                         else:
                             joblist.append(clopy[b])
+                        last_job = joblist
+                        jobs.append(joblist)
                 else:
+                    # Something broken in here, appending dates to existing lists or similar...
                     current = last_job
                     for c in range(len(current)):
                         if c in [3,4,5]:
@@ -65,10 +68,11 @@ def main():
                             print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
                             joblist.append(newdate)
                         else:
-                            joblist.append(current[c])
+                            joblist[c] = current[c]
                 joblist = utils.build_summary(joblist)
                 jobs.append(joblist)
                 last_job = joblist
+                joblist= []
                 # Remaining stuff goes here
         elif "quarterly" in job["FREQUENCY"]:
             after = False
@@ -78,10 +82,15 @@ def main():
                 push = a
                 if push < 1:
                     joblist = utils.handle_qtr(job, datedata, after)
-                    initial_run = joblist
+                    jobs.append(joblist)
+                    last_job = joblist
+                    print("DEBUG QTR - LIST: ", last_job)
+                    joblist = []
                 else:
-                    joblist = utils.run_qtr_jobs(initial_run, push)
-                jobs.append(joblist)
+                    joblist = utils.run_qtr_jobs(last_job, push)
+                    jobs.append(joblist)
+                    last_job = joblist
+                    joblist = []
                 # Remaining stuff goes here
         else:
             pass
@@ -89,7 +98,9 @@ def main():
     for item in jobs:
         print("LIST LEN: ", len(item))
         print("LIST: ", item)
-    final = pd.DataFrame(jobs, columns=cons.final_cols)
+    final = pd.DataFrame(jobs)
+    final = final.transpose()
+    final.columns = cons.final_cols
     final.to_csv("c:/code/test/tryagain.csv")
 
 if __name__ == '__main__':

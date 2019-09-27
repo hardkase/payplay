@@ -2,6 +2,7 @@
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 import cons
+import re
 
 def handle_qtr(job, datedata, after):
     qtr = datedata[5]
@@ -12,27 +13,16 @@ def handle_qtr(job, datedata, after):
             qtr = qtr - 4
         get_qtr_month = 0
     qtr_data = get_qtr(qtr)
+    job_data = [datedata[1], qtr_data[get_qtr_month]]  #year, qtr_month
     joblist = cons.TEMPLATE
     for a in range(len(job.index)):
         if job.index[a] in cons.TARGETS:
             value = job[a]
-            string = strcheck(value)
-            numero = intcheck(value)
-            if string:
-                value = value.strip()
-                hoax = hiding_number(value)
-                if hoax:
-                    value = scoop_num(value)
-            if string and "lwd" in value:
-                payday = get_lwd(datedata[1], qtr_data[get_qtr_month])
-                if "-" in value:
-                    value = re.sub(" ", "", value)
-                    value = value.strip()
-                    value = re.split("-", value)
-                    modifier = value[1]
-                    payday = payday + relativedelta(day=-modifier)
-            paydate = datebuilder(datedata[1], qtr_data[get_qtr_month], payday)
+            value = value_checker(value, job_data)
+            paydate = datebuilder(datedata[1], qtr_data[get_qtr_month], value)
             joblist.append(paydate)
+        else:
+            joblist.append(job[a])
     print(joblist)
     return joblist
 
@@ -70,7 +60,7 @@ def scoop_num(value):
 def datebuilder(year, month, day):
     error = False
     try:
-        newdate = dt.date(year, month, date)
+        newdate = dt.date(year, month, day)
     except ValueError as er1:
         print("Value Error: ", er1)
         error = True
@@ -192,6 +182,28 @@ def get_lwd(year, month):
     return lwd
 
 def get_qtr(qtr):
-    qtr_data = QUARTERS.get(qtr)
+    qtr_data = cons.QUARTERS.get(qtr)
     return qtr_data
+
+def value_checker(value, job_data):  # We gonna distill us some truth bois
+    stringer = isinstance(value, str)
+    numero = isinstance(value, int)
+    if numero:
+        whiskey = value
+    elif stringer:
+        cloaked_int = value.isdigit()
+        if cloaked_int:
+            whiskey = int(value)
+        if stringer and value == "lwd":
+            last = get_lwd(jobd_data[0], job_data[1])
+        elif stringer and "-" in value:
+            last = get_lwd(jobd_data[0], job_data[1])
+            value = value.strip()
+            value = re.sub(" ", "", value)
+            valist = re.split("-", value)
+            modifier = valist[1]
+            whiskey = last - modifier
+    else:
+        whiskey = 0
+    return whiskey
 
