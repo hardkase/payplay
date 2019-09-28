@@ -13,6 +13,23 @@ import cons
 WEEKDAYLIST = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
 def main():
+    """"
+    RE: Weekly
+    If today is Tuesday and payday is Friday
+    1) Tuesday = 1, Friday = 4
+    We need to advance the date by 3
+    2) If today is Friday and payday is Tuesday
+    We need to decrement date by 3
+    1) current day 1 - target date  4 = -3 but -(-3) is + 3 so...
+    1) target day 4 - current date 1 = 3
+    2) current day 4 - target date = 3
+    2) target day 1 - target date 4 = -3
+    if relativedelta is days=+ want second option
+    if reltivedelta is days=- want first option
+    I think this is commutative so either option works
+    provided correct operator is used
+    +7 brings target date to next week so gtg
+    """
     pd.options.mode.chained_assignment = None
     opsys = platform.platform()
     print(opsys)
@@ -51,28 +68,29 @@ def main():
                             firstpay = today + relativedelta(days=+daydiff)
                             print("CHECK2: ", firstpay)
                             joblist.append(firstpay)
-                            # IF THIS DOESN@T WORK, try pushing indent  next 3 down past else and left one level
                         else:
                             joblist.append(clopy[b])
-                        last_job = joblist
-                        jobs.append(joblist)
+                    jobs.append(joblist)
+                    last_job = joblist
+                    joblist.clear()
                 else:
                     # Something broken in here, appending dates to existing lists or similar...
-                    current = last_job
+                    current = []
+                    current = cons.TEMPLATE
                     for c in range(len(current)):
                         if c in [3,4,5]:
                             print("TEST 2!")
-                            oldpaydate = current[c]
+                            oldpaydate = last_job[c]
                             print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
                             newdate = oldpaydate + relativedelta(weeks=+1)
                             print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
-                            joblist.append(newdate)
+                            current[c] = newdate
                         else:
-                            joblist[c] = current[c]
-                joblist = utils.build_summary(joblist)
-                jobs.append(joblist)
-                last_job = joblist
-                joblist= []
+                            current[c] = last_job[c]
+                        current = utils.build_summary(current)
+                        jobs.append(current)
+                        last_job = current
+                        current.clear()
                 # Remaining stuff goes here
         elif "quarterly" in job["FREQUENCY"]:
             after = False
@@ -85,8 +103,9 @@ def main():
                     jobs.append(joblist)
                     last_job = joblist
                     print("DEBUG QTR - LIST: ", last_job)
-                    joblist = []
+                    joblist.clear()
                 else:
+
                     joblist = utils.run_qtr_jobs(last_job, push)
                     jobs.append(joblist)
                     last_job = joblist
@@ -98,8 +117,8 @@ def main():
     for item in jobs:
         print("LIST LEN: ", len(item))
         print("LIST: ", item)
-    final = pd.DataFrame(jobs)
-    final = final.transpose()
+    final = pd.DataFrame(jobs, columns=cons.final_cols)
+    # final = final.transpose()
     final.columns = cons.final_cols
     final.to_csv("c:/code/test/tryagain.csv")
 
