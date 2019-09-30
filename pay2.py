@@ -8,7 +8,7 @@ import platform
 import re
 import utils
 import cons
-
+from job import Job
 
 WEEKDAYLIST = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
 
@@ -52,6 +52,12 @@ def main():
     last_job = []
     for i in range(len(data.index)):
         job = data.iloc[i]
+        jobbo = Job(data.iloc[i], datedata)
+        joblist = jobbo.listify() # testing class function
+        for item in joblist:
+            print(item)
+        newyoke = jobbo.unlist_before(joblist)
+        print(newyoke)
         if job["FREQUENCY"]=="weekly":
             for a in range(0,52):
                 joblist = cons.TEMPLATE
@@ -72,7 +78,7 @@ def main():
                             joblist.append(clopy[b])
                     jobs.append(joblist)
                     last_job = joblist
-                    joblist.clear()
+                    # joblist.clear()
                 else:
                     # Something broken in here, appending dates to existing lists or similar...
                     current = []
@@ -90,7 +96,7 @@ def main():
                         current = utils.build_summary(current)
                         jobs.append(current)
                         last_job = current
-                        current.clear()
+                        # current.clear()
                 # Remaining stuff goes here
         elif "quarterly" in job["FREQUENCY"]:
             after = False
@@ -103,13 +109,13 @@ def main():
                     jobs.append(joblist)
                     last_job = joblist
                     print("DEBUG QTR - LIST: ", last_job)
-                    joblist.clear()
+                    # joblist.clear()
                 else:
 
                     joblist = utils.run_qtr_jobs(last_job, push)
                     jobs.append(joblist)
                     last_job = joblist
-                    joblist = []
+                    # joblist = []
                 # Remaining stuff goes here
         else:
             pass
