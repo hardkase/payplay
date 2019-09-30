@@ -75,14 +75,17 @@ def datebuilder(year, month, day):
         newdate = dt.date(1941, 12, 7)
     return newdate
 
-def build_summary(job):
+def build_summary(joblist):
     print("DEBUG LEN: {0}, VAL: {1}".format(len(job), job))
     client = job[1]
     freq = job[2]
     pay = job[3]
     summary = "{0} - {1} - {2}".format(client, freq, pay)
-    job[0] = summary
-    return job
+    joblist[0] = summary
+    return joblist
+
+def build_sum(job):
+    job.summary = "{0} - {1} - {2}".format(job.client, job.freq, job.paydate, job.current_paydate)
 
 def get_lwd(year, month):
     print("MONTH {0}, YEAR{1}".format(month, year))
@@ -104,9 +107,9 @@ def value_checker(value, job_data):  # We gonna distill us some truth bois
         if cloaked_int:
             whiskey = int(value)
         if stringer and value == "lwd":
-            last = get_lwd(jobd_data[0], job_data[1])
+            last = get_lwd(job_data[0], job_data[1])
         elif stringer and "-" in value:
-            last = get_lwd(jobd_data[0], job_data[1])
+            last = get_lwd(job_data[0], job_data[1])
             value = value.strip()
             value = re.sub(" ", "", value)
             valist = re.split("-", value)
@@ -116,3 +119,54 @@ def value_checker(value, job_data):  # We gonna distill us some truth bois
         whiskey = 0
     return whiskey
 
+def handle_weekly(job):
+    first_job = job.jobdata
+    joblist = listor(first_job)
+    for b in range(len(first_job.index)):        
+        if first_job.index[b] in cons.TARGETS:
+            value = joblist[b + 1].strip()
+            target_day = get_wkday_val(value)
+            daydiff = (target_day - job.weekday) + 7
+            print("CHECK: ", job.today)
+            firstday = job.today + relativedelta(days=+daydiff)
+            print("CHECK2: ", firstday)
+            joblist[b + 1] = firstday
+            joblist = build_summary(joblist)
+            first = create_series(joblist)
+            job.current_paydate = firstday
+        else:
+            first_job[b]
+    job.current_job = first_job
+    return first_job
+
+def get_wkday_val(value):
+    valist = [number for number, weekday in cons.WEEKDAYS.items() if weekday == value]
+    target_day = valist.pop()
+    return target_day
+
+def run_weekly(job):
+    current = job.last_job
+    for c in range(len(current.index)):
+        # if c in [3,4,5]:
+        if current.index[c] in cons.TARGETS:
+            value = current[c]
+            # print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
+            value = value + relativedelta(weeks=+1)
+            current[c] = value
+            job.current_paydate = value
+            # print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
+        else:
+            current[c] = current[c]
+    job.current_job = current
+    return job
+
+def create_series(joblist):
+    jobrun = pd.series(joblist, index=cons.final_cols)
+    return jobrun
+
+def listor(job):
+    joblist = ["summary"]
+    print(job.index)
+    for a in range(job.index):
+        joblist.append(job[a])
+    return joblist

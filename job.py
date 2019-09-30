@@ -17,14 +17,15 @@ class Job(object):
         self.weekday = date_data[4]
         self.qtr = date_data[5]
         self.summary = "summary"
+        self.current_paydate = ""
         self.client = jobdata["CLIENT"]
         self.freq = jobdata["FREQUENCY"]
         self.paydate = jobdata["PAY_DATE"]
         self.inputs = jobdata["INPUTS_DUE"]
         self.reports = jobdata["SEND_REPORTS"]
         self.joblist = []
-        self.current_job = []
-        self.last_job = []
+        self.current_job = pd.Series()
+        self.last_job = pd.Series()
     def listify(self):
         itemlist = []
         for entry in self.jobdata:

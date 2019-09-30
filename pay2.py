@@ -29,6 +29,10 @@ def main():
     I think this is commutative so either option works
     provided correct operator is used
     +7 brings target date to next week so gtg
+    JOB OBJECT - job series and data data
+    Read in from initial list, handle per freq
+    add summary, copy init processed job to last and push
+    initial copy series to all jobs list
     """
     pd.options.mode.chained_assignment = None
     opsys = platform.platform()
@@ -48,59 +52,37 @@ def main():
     print(data)
     data = data.apply(lambda x: x.astype(str).str.lower())
     print(data)
-    jobs = []
+    jobs = [] 
     last_job = []
     for i in range(len(data.index)):
-        job = data.iloc[i]
-        jobbo = Job(data.iloc[i], datedata)
-        joblist = jobbo.listify() # testing class function
+        # job = data.iloc[i]
+        job = Job(data.iloc[i], datedata)
+        joblist = job.listify() # testing class function
         for item in joblist:
             print(item)
-        newyoke = jobbo.unlist_before(joblist)
+        newyoke = job.unlist_before(joblist)
         print(newyoke)
-        if job["FREQUENCY"]=="weekly":
+        if job.jobdata["FREQUENCY"]=="weekly":
             for a in range(0,52):
-                joblist = cons.TEMPLATE
-                clopy = job
+                # joblist = cons.TEMPLATE
+                # clopy = job
                 if a < 1:
-                    for b in range(len(clopy.index)):
-                        if clopy.index[b] in cons.TARGETS:
-                            print("TEST!")
-                            value = clopy[b] # This should be a weekday str
-                            valist = [number for number, weekday in cons.WEEKDAYS.items() if weekday == value]
-                            paywkday = valist.pop()
-                            daydiff = (paywkday - datedata[4]) + 7
-                            print("CHECK: ", today)
-                            firstpay = today + relativedelta(days=+daydiff)
-                            print("CHECK2: ", firstpay)
-                            joblist.append(firstpay)
-                        else:
-                            joblist.append(clopy[b])
-                    jobs.append(joblist)
-                    last_job = joblist
+                    job = utils.handle_weekly(job)
+                    job.current_job = build_sum(job)
+                    jobs.append(job.current_job)
+                    job.last_job = job.current_job
                     # joblist.clear()
                 else:
                     # Something broken in here, appending dates to existing lists or similar...
-                    current = []
-                    current = cons.TEMPLATE
-                    for c in range(len(current)):
-                        if c in [3,4,5]:
-                            print("TEST 2!")
-                            oldpaydate = last_job[c]
-                            print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
-                            newdate = oldpaydate + relativedelta(weeks=+1)
-                            print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
-                            current[c] = newdate
-                        else:
-                            current[c] = last_job[c]
-                        current = utils.build_summary(current)
-                        jobs.append(current)
-                        last_job = current
-                        # current.clear()
-                # Remaining stuff goes here
-        elif "quarterly" in job["FREQUENCY"]:
+                    job = utils.run_weekly(job)
+                    job.current_job = build_sum(job)
+                    jobs.append(job.current_job)
+                    job.last_job = job.current_job
+                    # current.clear()
+                    # Remaining stuff goes here
+        elif "quarterly" in job.jobdata["FREQUENCY"]:
             after = False
-            if job["FREQUENCY"] == "quarterly-after":
+            if job.jobdata["FREQUENCY"] == "quarterly-after":
                 after = True
             for a in range(0,4):
                 push = a
