@@ -23,8 +23,9 @@ class Job(object):
         self.paydate = jobdata["PAY_DATE"]
         self.inputs = jobdata["INPUTS_DUE"]
         self.reports = jobdata["SEND_REPORTS"]
-        self.joblist = []
+        # self.joblist = [] Trying to only deal with series in and series out, joblist only exists during run
         self.current_job = pd.Series()
+        self.first_job = pd.Series()
         self.last_job = pd.Series()
     def listify(self):
         itemlist = []

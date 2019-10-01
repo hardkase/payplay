@@ -1,4 +1,5 @@
 # utils
+import pandas as pd
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 from calendar import monthrange
@@ -76,10 +77,10 @@ def datebuilder(year, month, day):
     return newdate
 
 def build_summary(joblist):
-    print("DEBUG LEN: {0}, VAL: {1}".format(len(job), job))
-    client = job[1]
-    freq = job[2]
-    pay = job[3]
+    # print("DEBUG LEN: {0}, VAL: {1}".format(len(job), job))
+    client = joblist[1]
+    freq = joblist[2]
+    pay = joblist[3]
     summary = "{0} - {1} - {2}".format(client, freq, pay)
     joblist[0] = summary
     return joblist
@@ -122,22 +123,25 @@ def value_checker(value, job_data):  # We gonna distill us some truth bois
 def handle_weekly(job):
     first_job = job.jobdata
     joblist = listor(first_job)
+    print("DEBUG - LENGTH COMPARE SERIES {0} AND LIST {1}".format(len(first_job.index), len(joblist)))
     for b in range(len(first_job.index)):        
         if first_job.index[b] in cons.TARGETS:
-            value = joblist[b + 1].strip()
+            value = joblist[b].strip()
             target_day = get_wkday_val(value)
             daydiff = (target_day - job.weekday) + 7
-            print("CHECK: ", job.today)
             firstday = job.today + relativedelta(days=+daydiff)
-            print("CHECK2: ", firstday)
-            joblist[b + 1] = firstday
-            joblist = build_summary(joblist)
-            first = create_series(joblist)
+            joblist[b] = firstday
             job.current_paydate = firstday
+            print("CHECK2: ", firstday)
+            #Trying to not do else because nothing should change
         else:
-            first_job[b]
-    job.current_job = first_job
-    return first_job
+            joblist[b] = first_job[b]
+        joblist = build_summary(joblist)
+        job.first_job = create_series(joblist)
+        job.current_job = job.first_job
+        job.last_job = job.current_job
+        print(job.current_job)
+    return job
 
 def get_wkday_val(value):
     valist = [number for number, weekday in cons.WEEKDAYS.items() if weekday == value]
@@ -145,28 +149,47 @@ def get_wkday_val(value):
     return target_day
 
 def run_weekly(job):
-    current = job.last_job
-    for c in range(len(current.index)):
+    current_job = job.last_job
+    joblist = listor(current_job)
+    for c in range(len(current_job.index)):
+        print("DEBUG - JOB IS GOING HERE...")
         # if c in [3,4,5]:
-        if current.index[c] in cons.TARGETS:
-            value = current[c]
+        if current_job.index[c] in cons.TARGETS:
+            print("DEBUG AGAIN - IS JOB GOING HERE??")
+            value = joblist[c]
+            print("ANOTHER DEBUG", value)
             # print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
             value = value + relativedelta(weeks=+1)
-            current[c] = value
+            joblist[c] = value
+            print("IS VALUE CHANGING???", joblist[c])
             job.current_paydate = value
             # print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
         else:
-            current[c] = current[c]
-    job.current_job = current
+            joblist[c] = current_job[c]
+        print("WHAT DOES JOBLIST LOOK LIKE?>?", joblist)
+        joblist = build_summary(joblist)
+        print("OK, WHAT DOES JOBLIST LOOK LIKE, NEW SUMMARY?", joblist)
+        current = create_series(joblist)
+        print("OK, Here's the new Series: ", current)
+        job.current_job = current
+        job.last_job = current_job
+        print(job.last_job)
     return job
 
 def create_series(joblist):
-    jobrun = pd.series(joblist, index=cons.final_cols)
+    print("ANOTHER LOOK AT JOBLIST...", joblist)
+    jobrun = pd.Series(joblist)
+    print("ANOTHER DEBUG - what does the series look like?", jobrun)
     return jobrun
 
 def listor(job):
-    joblist = ["summary"]
     print(job.index)
-    for a in range(job.index):
+    joblist = []
+    for a in range(len(job.index)):
         joblist.append(job[a])
     return joblist
+
+    """
+    OK, let's bonk dealing with series, we'll start with a dataframe, split to series for jobs, process all jobs as a list, pass
+    lists to alljobs list, take a look -> then see about sending list of jobs back to a DF>GRRRR ARRRGH
+    """
