@@ -7,6 +7,7 @@ import cons
 import re
 
 def handle_qtr(job, after):
+    job.job_run[:] = []
     first_job = job.jobdata
     qtr = job.qtr
     get_qtr_month = 1
@@ -22,32 +23,70 @@ def handle_qtr(job, after):
         if job.idx[a] in cons.TARGETS:
             value = first_job[a]
             value = value_checker(value, job_data)
-            paydate = datebuilder(job_data[0], qtr_data[get_qtr_month], value)
-            current_job.append(paydate)
-            job.current_paydate = paydate
+            # paydate = datebuilder(job_data[0], qtr_data[get_qtr_month], value)
+            current_job.append(value)
+            job.current_paydate = value
         else:
             current_job.append(first_job[a])
             # DEBUG shows jumping from iteration 1 to build summary, so logic funky somwehre here
     current_job[0] = build_summary(job)
-    job.current_job = current_job
-    job.last_job = job.current_job
-    print("Another bloody check - current job should be good", current_job)
+    job.last_job = current_job
+    job.job_run.append(current_job)  # might need to switch append/extend...
+    print("Another bloody check - current job should be good", job.last_job)
     return job
 
 def run_qtr_jobs(job):
-    current_job = job.last_job
+    last_gig = job.last_job
+    current_job = []
+    for i in range(len(job.idx)):
+        if job.idx[i] in cons.TARGETS:
+            new_date = last_gig[i] + relativedelta(months=+3)
+            current_job.append(new_date)
+            job.current_paydate = new_date
+        else:
+            current_job.append(last_gig[i])
+    current_job[0] = build_summary(job)
+    job.last_job = current_job
+    job.job_run.append(current_job)
+    print("Another bloody check - current job should be good", current_job)
+    return job
+
+def handle_monthly(job):
+    job.job_run[:] = []
+    first_job = job.jobdata
+    current_job = []
+    job_data = [job.year, job.month]
+    for x in range(len(job.idx)):
+        if job.idx[x] in cons.TARGETS:
+            value = first_job[x]
+            value = value_checker(value, job_data)
+            # paydate = datebuilder(job_data[0], job_data[1], value)
+            current_job.append(value)
+            job.current_paydate = value
+        else:
+            current_job.append(first_job[x])
+    current_job[0] = build_summary(job)
+    job.last_job = current_job
+    job.job_run.append(current_job)
+    return job
+
+def run_monthly(job):
+    last_gig = job.last_job
+    current_job = []
+    print("TEST - is last job right?: ", current_job) # tweak and replace
     for i in range(len(job.idx)):
         if job.idx[i] in cons.TARGETS:
             print("Test we're getting here")
-            print("old date", current_job[i])
-            new_date = current_job[i] + relativedelta(months=+3)
+            print("old date", last_gig[i])
+            new_date = last_gig[i] + relativedelta(months=+1)
             print("new date", new_date)
-            current_job[i] = new_date
+            current_job.append(new_date)
             job.current_paydate = new_date
-        # since we're re-using the list, try not to else this one
+        else:
+            current_job.append(last_gig[i])
     current_job[0] = build_summary(job)
-    job.current_job = current_job
-    job.last_job = job.current_job
+    job.last_job = current_job
+    job.job_run.append(current_job)
     print("Another bloody check - current job should be good", current_job)
     return job
 
@@ -86,6 +125,7 @@ def datebuilder(year, month, day):
         print("Type Error: ", er2)
         error = True
     if error:
+        print("************it's not working!!!****************")
         newdate = dt.date(1941, 12, 7)
     return newdate
 
@@ -113,6 +153,7 @@ def get_qtr(qtr):
 def value_checker(value, job_data):  # We gonna distill us some truth bois
     stringer = isinstance(value, str)
     numero = isinstance(value, int)
+    whiskey = 0
     if numero:
         whiskey = value
     elif stringer:
@@ -126,37 +167,34 @@ def value_checker(value, job_data):  # We gonna distill us some truth bois
             value = value.strip()
             value = re.sub(" ", "", value)
             valist = re.split("-", value)
-            modifier = valist[1]
+            modifier = int(valist[1])
+            print("Value checker check-last: {0}, mod: {1}".format(last, modifier))
             whiskey = last - modifier
     else:
         whiskey = 0
-    return whiskey
+    date = datebuilder(job_data[0], job_data[1], whiskey)
+    return date
 
 def handle_weekly(job):
-    first_job = job.current_job
+    job.job_run[:] = []
+    job.last_job[:] = []
+    first_job = job.jobdata
     current_job = []
-    print("DEBUG - LENGTH COMPARE SERIES {0} AND LIST {1}".format(len(job.jobdata.index), len(first_job)))
-    print("check start job: ", first_job)
     for b in range(len(job.idx)):        
         if job.idx[b] in cons.TARGETS:
             value = first_job[b].strip()
             target_day = get_wkday_val(value)
-            print("Target day value: ", target_day)
             daydiff = (target_day - job.weekday) + 7
-            print("Daydiff value: ", daydiff)
             firstday = job.today + relativedelta(days=+daydiff)
             current_job.append(firstday)
             job.current_paydate = firstday
-            print("CHECK1", job.current_paydate)
             #Trying to not do else because nothing should change
-            print("Check Job: ", current_job)
         else:
             current_job.append(first_job[b])
         current_job[0] = build_summary(job)
-        job.current_job = current_job
-        job.last_job = job.current_job
+        job.last_job = current_job
+        job.job_run.append(current_job)
         print("Another bloody check - current job should be good", current_job)
-        print(job.current_job)
     return job
 
 def get_wkday_val(value):
@@ -166,29 +204,19 @@ def get_wkday_val(value):
 
 def run_weekly(job):
     last_job = job.last_job
-    print("check weekly run job - len: {0}, data: {1}".format(len(last_job), last_job))
-    current_job = job.current_job
-    print("check weekly run job - len: {0}, data: {1}".format(len(current_job), current_job))
+    current_job = []
     for c in range(len(job.idx)):
-        print("DEBUG - JOB IS GOING HERE...")
-        # if c in [3,4,5]:
         if job.idx[c] in cons.TARGETS:
-            print("DEBUG AGAIN - IS JOB GOING HERE??")
-            value = current_job[c]
-            print("ANOTHER DEBUG", value)
-            # print("OLD DATE TYPE: {0}, VALUE: {1}".format(type(oldpaydate), oldpaydate))
+            value = last_job[c]
             value = value + relativedelta(weeks=+1)
-            current_job[c] = value
-            # print("IS VALUE CHANGING???", joblist[c])
+            current_job.append(value)
             job.current_paydate = value
-            # print("NEWDATE TYPE: {0}, VALUE: {1}".format(type(newdate), newdate))
         else:
-            current_job[c] = current_job[c]
-        # print("WHAT DOES JOBLIST LOOK LIKE?>?", joblist)
+            current_job.append(last_job[c])
         current_job[0] = build_summary(job)
         print("OK, WHAT DOES JOBLIST LOOK LIKE, NEW SUMMARY?", current_job)
-        job.current_job = current_job
         job.last_job = current_job
+        job.job_run.append(current_job)
         print(job.last_job)
     return job
 

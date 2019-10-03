@@ -25,29 +25,21 @@ def main():
     print(data)
     data = data.apply(lambda x: x.astype(str).str.lower())
     print(data)
-    run_box = []
     alljobs = []
     for a in range(len(data.index)):
         jobdata = data.iloc[a]
         thisjob = Job(jobdata, date_data)
-        thisjob.current_job = thisjob.listify()
-        print(thisjob.jobdata)
-        print(thisjob.idx)
-        print(thisjob.client)
+        print("JOB DATA: ", thisjob.jobdata)
+        print("DATA INDEX: ", thisjob.idx)
+        print("Client: ", thisjob.client)
         if thisjob.freq == "weekly":
             for b in range(0, 52):
                 if b < 1:
                     thisjob = utils.handle_weekly(thisjob)
-                    blob = thisjob.current_job
-                    print("Check job on object, first run: ", blob)
                     print("how about this :", thisjob.current_paydate)
-                    run_box.append(thisjob.current_job)
                 else:
                     print("Check job on object, next run: ", thisjob.last_job)
                     thisjob = utils.run_weekly(thisjob)
-                    current = thisjob.current_job
-                    run_box.append(current)
-                print(run_box)
         elif "quarterly" in thisjob.freq:
             after = False
             if thisjob.jobdata["FREQUENCY"].strip() == "quarterly-after":
@@ -55,20 +47,25 @@ def main():
                 for b in range(0, 4):
                     if b < 1:
                         thisjob = utils.handle_qtr(thisjob, after)
-                        run_box.append(thisjob.current_job)
                     else:
                         thisjob = utils.run_qtr_jobs(thisjob)
-                        run_box.append(thisjob.current_job)
+            else:
+                for b in range(0, 4):
+                    if b < 1:
+                        thisjob = utils.handle_qtr(thisjob, after)
+                    else:
+                        thisjob = utils.run_qtr_jobs(thisjob)
         else:  #MONTHLY
             for b in range(0, 12):
                 if b < 1:
-                    pass
+                    utils.handle_monthly(thisjob)
                 else:
-                    pass
-        alljobs.extend(run_box)
-        run_box[:] = []    
+                    utils.run_monthly(thisjob)
+        job_runs = thisjob.job_run
+        alljobs.extend(job_runs)
     for item in alljobs:
-        print("TEST! ", item)       
+        print("TEST! ", item)     
+    print("LEN OF ALL JOBS: ", len(alljobs))  
     final = pd.DataFrame(alljobs, columns = cons.final_cols)
     print("Here We Go! : ", final)
 
