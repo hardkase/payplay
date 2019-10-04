@@ -13,9 +13,9 @@ def main():
     opsys = platform.platform()
     print(opsys)
     if "Linux" in opsys:
-        PATHDATA = "~/payplay/payplay/fakepay2.xlsx"
+        PATHDATA = "~/payplay/payplay/fakepay.xlsx"
     else:
-        PATHDATA = "c:/code/fakepay2.xlsx"
+        PATHDATA = "c:/code/fakepay.xlsx"
     data = pd.DataFrame(pd.read_excel(PATHDATA))
     today = dt.date.today()
     date_data = [today, today.year, today.month, today.day, today.weekday(), pd.Timestamp(today).quarter]
@@ -68,6 +68,7 @@ def main():
     print("LEN OF ALL JOBS: ", len(alljobs))  
     final = pd.DataFrame(alljobs, columns = cons.final_cols)
     print("Here We Go! : ", final)
+    utils.csvmaker(final, opsys)
 
 if __name__ == '__main__':
     main()
