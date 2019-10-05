@@ -1,11 +1,3 @@
-
-import pandas as pd 
-import numpy as np 
-import datetime as dt
-import utils
-import cons
-
-
 """
 Project: PayPlay - mock payroll data conversion exercise
 Description:
@@ -23,7 +15,20 @@ Content:
 Job Class - ad hoc container for job and date data
 """
 
+import pandas as pd 
+import numpy as np 
+import datetime as dt
+import utils
+import cons
+
+
 class Job(object):
+    """
+    After some frustration dealing with Series when processing jobs, decided to give creating a job object a try.
+    Considerably easier to deal with. Contains job data (series), and parsed out date data. Parses reused job details, the 
+    jobdata index, the first run, the last job, and a list of all the jobs created for a particular job. Includes functions
+    to create a list from a series, and two unused functions to create a series from a list.
+    """
     def __init__(self, jobdata, date_data): # job: series, today's datedataclient, frequency, paydate, inputs, reports, 
         self.jobdata = jobdata
         self.date_data = date_data

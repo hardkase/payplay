@@ -14,6 +14,7 @@ Filename: utils.py
 Content:
 Utility functions used in pay.py (main function)
 """
+
 import pandas as pd
 import datetime as dt
 from dateutil.relativedelta import relativedelta
@@ -22,6 +23,13 @@ import cons
 import re
 
 def handle_weekly(job):
+    """
+    Value for weekly jobs is usually a string representing a non-weekend weekday. Current logic
+    Takes 'today' weekday value, shifts forward or back to the target day of the week, then slides
+    forward by one week so initial weekly paydate is next week. 
+    You can remove the week forward shift by removing '+ 7' in daydiff. Doing so means a paydate may
+    fall today or in the past, so you might need to include logic to check if a date value is past.
+    """
     job.job_run[:] = []
     job.last_job[:] = []
     first_job = job.jobdata
@@ -44,6 +52,12 @@ def handle_weekly(job):
     return job
 
 def run_weekly(job):
+    """
+    Dead simple. Take last week's job and forward the date by one week.
+    As weeks are specified by a non-weekday string, you don't need to 
+    worry about weekend checks, but you would need to consider holiday
+    checks (not currently implemented)
+    """
     last_job = job.last_job
     current_job = []
     for c in range(len(job.idx)):
@@ -62,6 +76,13 @@ def run_weekly(job):
     return job
 
 def handle_qtr(job, after):
+    """
+    This function is somewhat tricky. Value is either a number or a string, or
+    a string with a number. So several checks are required. In addition, it's necessary to make sure 
+    late dates don't fall beyond the dates in a month. Further it's necessary to check if the date
+    falls on a weekend and adjust (implemented) or a holiday and adjust (not implemnented). Using the
+    passed after variable, this function can handle jobs either in the quarter or after the quarter.
+    """
     job.job_run[:] = []
     first_job = job.jobdata
     qtr = job.qtr
@@ -92,6 +113,10 @@ def handle_qtr(job, after):
     return job
 
 def run_qtr_jobs(job):
+    """
+    Take last qtr job date and push forward 3 months. Have to recheck original value, get
+    correct last day accordingly, and check for weekend.
+    """
     last_gig = job.last_job
     current_job = []
     for i in range(len(job.idx)):
@@ -109,6 +134,9 @@ def run_qtr_jobs(job):
     return job
 
 def handle_monthly(job):
+    """
+    Handles initial month job in similar fashion to handle_quarterly.
+    """
     job.job_run[:] = []
     first_job = job.jobdata
     current_job = []
@@ -129,6 +157,9 @@ def handle_monthly(job):
     return job
 
 def run_monthly(job):
+    """
+    Iterates from handle_monthly. Similar in function to run_quarterly.
+    """
     last_gig = job.last_job
     current_job = []
     print("TEST - is last job right?: ", current_job) # tweak and replace
@@ -154,6 +185,10 @@ def run_monthly(job):
     return job
 
 def csvmaker(data, opsys):
+    """
+    Passes in initial platform check from main, uses either a linux or windoze dir, and creates a csv from 
+    Dataframe.
+    """
     if "Linux" in opsys:
         path = "~/payplay/payplay/final_output.csv"
     else:
@@ -161,18 +196,27 @@ def csvmaker(data, opsys):
     data.to_csv(path)
 
 def stringcheck(value):
+    """
+    checks if value is a string, returns bool
+    """
     isastr = False
     if isinstance(value, str):
         isastr = True
     return isastr
 
 def intcheck(value):
+    """
+    checks if value is an int, returns bool
+    """
     isnumber = False
     if isinstance(value, int):
         isnumber = True
     return isnumber
 
 def hiding_number(value):
+    """
+    checks if str is a digit, returns bool
+    """
     actnum = False
     if isinstance(value, str):
         if value.isdigit():
@@ -181,10 +225,17 @@ def hiding_number(value):
     return actnum
 
 def scoop_num(value):
+    """
+    When a value is identified as a stringified int, casts to int and returns
+    """
     value = int(value)
     return value
 
 def datebuilder(year, month, day):
+    """
+    Try/Except creating datetime.date object using passed values
+    Returns date, prints error.
+    """
     error = False
     try:
         newdate = dt.date(year, month, day)
@@ -201,6 +252,9 @@ def datebuilder(year, month, day):
     return newdate
 
 def build_summary(job):
+    """
+    Build summary from completed job data and replace default summary
+    """
     # print("DEBUG LEN: {0}, VAL: {1}".format(len(job), job))
     client = job.client
     freq = job.freq
@@ -209,19 +263,31 @@ def build_summary(job):
     return summary
 
 def build_sum(job):
+    # Deprecated attempt at using object to create summary
     job.summary = "{0} - {1} - {2}".format(job.client, job.freq, job.paydate, job.current_paydate)
 
 def get_lwd(year, month):
+    """
+    uses calendar.monthrange to return the last day for a given month in a given year
+    """
     print("MONTH {0}, YEAR{1}".format(month, year))
     value = monthrange(year, month)
     lwd = value[1]
     return lwd
 
 def get_qtr(qtr):
+    """
+    Uses qtr int value to return qtr list with first and last month of qtr.
+    """
     qtr_data = cons.QUARTERS.get(qtr)
     return qtr_data
 
 def value_checker(value, job_data):  # We gonna distill us some truth bois
+    """
+    Found out the hard way that values weren't always playing nice. For Quarterly and
+    monthly, necessary to check the value, de-string ints, and computer lwd - num.
+    There's a few iterations done here, but current one returns the completed date.
+    """
     stringer = isinstance(value, str)
     numero = isinstance(value, int)
     last_day = "dude..."
@@ -245,11 +311,20 @@ def value_checker(value, job_data):  # We gonna distill us some truth bois
     return date
 
 def value_splitter(value):
+    """
+    If value checker finds a '-' in the value, sends it here to split the string,
+    cast second element to int, and return it.
+    """
     value = re.split("-", value)
     modifier = int(value[1].strip())
     return modifier
 
 def weekend_checker(date):
+    """
+    Dead simple. If the passed date.weekday() = 5 (sat) or 6 (sun)
+    use relativedelta to slide date to friday. If you don't want weekend 
+    checking, turn this call off in all quarterly and monthly functions.
+    """
     wkend = False
     wkday = date.weekday()
     if wkday in [5, 6]:
@@ -261,24 +336,30 @@ def weekend_checker(date):
     return date
 
 def get_wkday_val(value):
+    """
+    Reverse lookup in the day dictionary to get the key when you have the value.
+    """
     valist = [number for number, weekday in cons.WEEKDAYS.items() if weekday == value]
     target_day = valist.pop()
     return target_day
 
 def create_series(joblist):
+    """
+    Use of Pandas Series within helper functions was deprecated, so this function
+    is not currently used.
+    """
     print("ANOTHER LOOK AT JOBLIST...", joblist)
     jobrun = pd.Series(joblist)
     print("ANOTHER DEBUG - what does the series look like?", jobrun)
     return jobrun
 
 def listor(job):
+    """
+    Create a list from a series. Duplicate to job.listify(). Not currently used.
+    """
     print(job.index)
     joblist = []
     for a in range(len(job.index)):
         joblist.append(job[a])
     return joblist
 
-    """
-    OK, let's bonk dealing with series, we'll start with a dataframe, split to series for jobs, process all jobs as a list, pass
-    lists to alljobs list, take a look -> then see about sending list of jobs back to a DF>GRRRR ARRRGH
-    """
